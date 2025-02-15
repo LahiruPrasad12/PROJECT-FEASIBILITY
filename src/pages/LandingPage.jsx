@@ -2,7 +2,7 @@ import React from "react";
 import image1 from "../assets/images/img1.jpg"; // Replace with actual path
 import prfImage from "../assets/images/profileImage.png"; // Replace with actual path
 import HDimg from "../assets/images/header.png"; // Replace with actual path
-import step1Image from "../assets/images/img1.jpg"; // Replace with actual path
+import step1Image from "../assets/images/sideIMG2.png"; // Replace with actual path
 
 const Header = () => {
     return (
@@ -45,26 +45,50 @@ const WhyChooseUs = () => {
 
 const Step1Download = () => {
     return (
-        <section className="w-full flex justify-center items-center py-16 bg-white">
-            <div className="flex flex-row items-center max-w-5xl mx-auto gap-6 p-8 shadow-lg rounded-xl bg-white border border-gray-200">
-                <div className="w-1/2 flex justify-center">
-                    <img src={step1Image} alt="Step 1 Illustration" className="w-full max-w-md" />
+        <div className="flex flex-col items-start p-12 bg-white w-full max-w-7xl mx-auto">
+            {/* Title Section */}
+            <h3 className="text-gray-700 text-lg font-medium">Step 1</h3>
+            <h2 className="text-4xl font-extrabold text-gray-900 mt-2">
+                Download Project Proposal Template
+            </h2>
+
+            {/* Main Content Section */}
+            <div className="flex flex-col md:flex-row items-center w-full mt-6">
+                {/* Left Side - Image */}
+                <div className="md:w-1/2 flex justify-center">
+                    <img
+                        src={step1Image}
+                        alt="Team Collaboration"
+                        className="w-96 h-auto"
+                    />
                 </div>
-                <div className="w-1/2 text-left">
-                    <h3 className="text-gray-500 text-sm">Step 1</h3>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Download Project Proposal Template</h2>
-                    <ul className="text-gray-700 space-y-2 text-md">
-                        <li><strong>Download the Template</strong> – Click the Download button below to get the project proposal form.</li>
-                        <li><strong>Fill Out the Form</strong> – Enter all required project details in the downloaded template.</li>
-                        <li><strong>Proceed to Upload</strong> – Once completed, continue to the next step to upload your filled form.</li>
+
+                {/* Right Side - Text Content */}
+                <div className="md:w-1/2 text-left md:pl-12">
+                    <ul className="text-gray-700 space-y-4 text-lg leading-relaxed">
+                        <li>
+                            <strong>Download the Template</strong> – Click the Download button below to get the project proposal form.
+                        </li>
+                        <li>
+                            <strong>Fill Out the Form</strong> – Enter all required project details in the downloaded template.
+                        </li>
+                        <li>
+                            <strong>Proceed to Upload</strong> – Once completed, continue to the next step to upload your filled form.
+                        </li>
                     </ul>
-                    <div className="mt-6 flex gap-4">
-                        <button className="bg-gray-900 text-white px-5 py-2 rounded-md shadow hover:bg-gray-700 transition">Download Form</button>
-                        <button className="bg-orange-500 text-white px-5 py-2 rounded-md shadow hover:bg-orange-400 transition">Go to Step 2</button>
+
+                    {/* Buttons */}
+                    <div className="mt-6 flex space-x-6">
+                        <button className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 text-lg">
+                            Download Form
+                        </button>
+                        <button className="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-orange-600 text-lg">
+                            Go to Step 2
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 
