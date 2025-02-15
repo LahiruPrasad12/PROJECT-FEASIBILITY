@@ -4,55 +4,45 @@ import discoverImage from "../assets/logo.png"; // Replace with actual path
 
 const SignIn = () => {
   return (
-    <div className="relative w-screen h-screen bg-white flex items-center justify-center">
-      <div className="flex w-[1440px] h-[1024px]">
+    <div className="w-full h-screen flex justify-center items-center bg-white">
+      <div className="flex flex-row w-[90%] max-w-[1440px]">
         {/* Left Side - Sign In Form */}
-        <div className="w-1/2 flex flex-col items-start pl-[140px]">
-          <h2 className="absolute top-[271px] left-[131px] text-[70px] font-extrabold text-[#EB5E28] font-inter">
-            SIGN IN
-          </h2>
+        <div className="flex flex-col items-start pl-[160px] w-1/2 mt-10">
+          <h2 className="text-[70px] font-extrabold text-[#eb5e28] mb-5">SIGN IN</h2>
 
           {/* Email Input */}
           <input
             type="email"
             placeholder="Email..."
-            className="absolute top-[410px] left-[131px] w-[467px] h-[54px] bg-[#EAEAEA] rounded-[20px] pl-5 text-[21px] text-black font-poppins"
+            className="w-[467px] h-[54px] bg-[#eaeaea] rounded-[20px] px-4 text-[21px] mb-4 outline-none"
           />
 
           {/* Password Input */}
           <input
             type="password"
             placeholder="Password..."
-            className="absolute top-[491px] left-[131px] w-[467px] h-[54px] bg-[#EAEAEA] rounded-[20px] pl-5 text-[21px] text-black font-poppins"
+            className="w-[467px] h-[54px] bg-[#eaeaea] rounded-[20px] px-4 text-[21px] mb-4 outline-none"
           />
 
           {/* Forgot Password */}
-          <p className="absolute top-[577px] left-[131px] text-[20px] font-poppins text-black">
+          <p className="left-[131px] text-[20px] font-poppins text-black">
             Forgot Password?
           </p>
 
           {/* Sign In Button */}
-          <button className="absolute top-[632px] left-[131px] w-[258px] h-[60px] bg-[#EB5E28] text-white text-[18px] font-bold font-poppins rounded-[20px] flex items-center justify-center">
+          <button className="w-[258px] h-[60px] bg-[#eb5e28] rounded-[20px] text-white font-bold text-[18px] mt-5">
             Sign In
           </button>
 
           {/* Sign Up Section */}
-          <p className="absolute top-[740px] left-[131px] text-[20px] font-poppins text-black">
-            Not a member ?
+          <p className="text-[20px] mt-5 text-black">
+            Not a member? <span className="font-extrabold text-[#eb5e28] cursor-pointer">Sign Up</span>
           </p>
-          <span className="absolute top-[742px] left-[300px] text-[20px] font-extrabold font-poppins text-[#EB5E28]">
-            Sign Up
-          </span>
         </div>
 
         {/* Right Side - Logo Section */}
-        <div >
-          <div className="absolute top-[205px] w-[746px] h-[672px] flex flex-col items-center">
-            <img
-              src={discoverImage}
-              alt="Discover Your Project"
-            />
-          </div>
+        <div className="flex justify-center items-center w-1/2">
+          <img src={logo} alt="Discover Your Project" className="max-w-full h-auto" />
         </div>
       </div>
     </div>
