@@ -5,6 +5,10 @@ import HDimg from "../assets/images/header.png"; // Replace with actual path
 import step1Image from "../assets/images/sideIMG1.jpg"; // Replace with actual path
 import { Upload } from "lucide-react";
 import step2Image from "../assets/images/sideIMG2.png"; // Replace with actual image path
+import step3Image from "../assets/images/sideIMG3.png"; // Replace with the correct image path
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
     return (
@@ -105,49 +109,137 @@ const Step2Upload = () => {
     return (
         <div className=" w-full max-w-8xl bg-gray-100 mx-auto p-12 flex items-center">
             <div className="max-w-6xl mx-auto flex items-center">
-            {/* Left Content */}
-            <div className="w-2/3">
-                <h2 className="text-lg font-semibold text-gray-700">Step 2</h2>
-                <h3 className="text-4xl font-extrabold text-gray-900 mt-2 mb-4">
-                    Upload Project Proposal Template
-                </h3>
-                <strong className="text-gray-700 space-y-5 text-lg leading-relaxed mt-4">
-                    Now that you have filled out the project proposal template, follow these steps to upload it:
-                </strong>
-                <ul className="text-gray-700 space-y-4 text-lg leading-relaxed mt-2">
-                    <li>
-                        <strong>Select Your File</strong> - Click the Upload button
-                        below and choose the completed proposal form from your device.
-                    </li>
-                    <li>
-                        <strong>Verify Your Upload</strong> - Ensure the correct file is
-                        selected before proceeding.
-                    </li>
-                    <li>
-                        <strong>Submit & Continue</strong> - Click Submit to upload your
-                        proposal and move to the next step.
-                    </li>
-                </ul>
-                <div className="mt-6 flex space-x-4">
-                    <label className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md cursor-pointer flex items-center gap-2">
-                        <Upload size={16} /> Upload Form
-                        <input type="file" className="hidden" onChange={handleFileChange} />
-                    </label>
-                    <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md">
-                        Go to Step 3
-                    </button>
+                {/* Left Content */}
+                <div className="w-2/3">
+                    <h2 className="text-lg font-semibold text-gray-700">Step 2</h2>
+                    <h3 className="text-4xl font-extrabold text-gray-900 mt-2 mb-4">
+                        Upload Project Proposal Template
+                    </h3>
+                    <p className="text-gray-600">
+                        Now that you have filled out the project proposal template, follow these steps to upload it:
+                    </p>
+                    <ul className="list-none text-gray-600 mt-4 space-y-3">
+                        <li>
+                            <strong>Select Your File</strong> - Click the Upload button
+                            below and choose the completed proposal form from your device.
+                        </li>
+                        <li>
+                            <strong>Verify Your Upload</strong> - Ensure the correct file is
+                            selected before proceeding.
+                        </li>
+                        <li>
+                            <strong>Submit & Continue</strong> - Click Submit to upload your
+                            proposal and move to the next step.
+                        </li>
+                    </ul>
+                    <div className="mt-6 flex space-x-4">
+                        <label className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md cursor-pointer flex items-center gap-2">
+                            <Upload size={16} /> Upload Form
+                            <input type="file" className="hidden" onChange={handleFileChange} />
+                        </label>
+                        <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md">
+                            Go to Step 3
+                        </button>
+                    </div>
+                    {selectedFile && (
+                        <p className="text-sm text-green-600 mt-2">Selected file: {selectedFile.name}</p>
+                    )}
                 </div>
-                {selectedFile && (
-                    <p className="text-sm text-green-600 mt-2">Selected file: {selectedFile.name}</p>
-                )}
-            </div>
 
-            {/* Right Image */}
-            <div className="w-1/3 flex justify-end">
-                <img src={step2Image} alt="Discussion Illustration" className="w-full h-auto" />
-            </div>
+                {/* Right Image */}
+                <div className="w-1/3 flex justify-end">
+                    <img src={step2Image} alt="Discussion Illustration" className="w-full h-auto" />
+                </div>
             </div>
         </div>
+    );
+};
+
+const Step3Quizz = () => {
+    return (
+        <div className="flex flex-col items-start p-12 bg-white w-full max-w-7xl mx-auto">
+            {/* Title Section (Spans Full Width, Centered) */}
+            <h3 className="text-gray-700 text-lg font-medium">Step 3</h3>
+            <h2 className="text-4xl font-extrabold text-gray-900 mt-2">
+                Feasibility Assessment Quizzes
+            </h2>
+
+
+            {/* Content Section */}
+            <div className="flex justify-between items-start mt-5">
+                {/* Left Image Section */}
+                <div className="w-1/3 p-2">
+                    <img src={step3Image} alt="Quiz Illustration" className="w-full h-auto rounded-md" />
+                </div>
+
+                {/* Right Text Section */}
+                <div className="w-2/3 pl-12">
+                    <p className="text-gray-600">
+                        Now that your project proposal is submitted, it's time to assess feasibility through four short quizzes.
+                        Follow these steps:
+                    </p>
+
+                    {/* Instructions List */}
+                    <ul className="list-none text-gray-600 mt-4 space-y-3">
+                        <li>
+                            <span className="font-semibold">1. Start the Quiz</span> – Click the Start Quiz button below to begin.
+                        </li>
+                        <li>
+                            <span className="font-semibold">2. Answer All Four Quizzes</span> – You will face questions on:
+                            <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
+                                <li>Organizational Feasibility</li>
+                                <li>Technical Feasibility</li>
+                                <li>Operational Feasibility</li>
+                                <li>Financial Feasibility</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span className="font-semibold">3. Complete Each Quiz</span> – Answer all questions carefully before proceeding to the next.
+                        </li>
+                        <li>
+                            <span className="font-semibold">4. Submit & Continue</span> – After finishing all four quizzes, submit your responses to move forward.
+                        </li>
+                    </ul>
+
+                    {/* Start Quiz Button */}
+                    <div className="mt-6">
+                        <button className="bg-black text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold hover:bg-gray-800">
+                            Start Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+const Footer = () => {
+    return (
+        <footer className="w-full bg-gray-100 py-6 px-6 md:px-12">
+            <div className="max-w-7xl mx-auto flex justify-between items-center">
+                {/* Left side: Copyright */}
+                <p className="text-gray-700">
+                    Copyright @2025 <span className="text-orange-500 font-semibold">SDSN</span>
+                </p>
+
+                {/* Right side: Social icons */}
+                <div className="flex space-x-4 text-black text-xl">
+                    <a href="#" aria-label="Facebook">
+                        <FontAwesomeIcon icon={faFacebook} />
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <FontAwesomeIcon icon={faInstagram} />
+                    </a>
+                    <a href="#" aria-label="WhatsApp">
+                        <FontAwesomeIcon icon={faWhatsapp} />
+                    </a>
+                    <a href="#" aria-label="Email">
+                        <FontAwesomeIcon icon={faEnvelope} />
+                    </a>
+                </div>
+            </div>
+        </footer>
     );
 };
 
@@ -176,6 +268,8 @@ const ProjectPlanning = () => {
             <WhyChooseUs />
             <Step1Download />
             <Step2Upload />
+            <Step3Quizz />
+            <Footer />
         </div>
     );
 };
