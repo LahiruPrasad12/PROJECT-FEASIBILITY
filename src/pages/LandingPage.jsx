@@ -9,6 +9,8 @@ import step3Image from "../assets/images/sideIMG3.png"; // Replace with the corr
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
+
 
 const Header = () => {
     return (
@@ -250,20 +252,37 @@ const ProjectPlanning = () => {
         <div className="relative min-h-screen bg-white flex flex-col items-center justify-center pt-20">
             <Header />
             <div className="relative w-[1300px] h-[550px] flex items-center justify-center">
-                <div className="absolute left-0 top-12 w-[657px] px-6 md:px-12">
+                {/* Left Content (Text + Button) */}
+                <motion.div
+                    className="absolute left-0 top-12 w-[657px] px-6 md:px-12"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                >
                     <h1 className="font-poppins font-extrabold text-[50px] leading-[75px] text-gray-900">
                         Smarter Project Planning
                     </h1>
                     <h2 className="font-poppins font-extrabold text-[50px] leading-[75px] text-orange-500 mt-2">
                         Starts with the Right Feasibility Check
                     </h2>
-                    <button className="mt-6 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 transition">
+                    <motion.button
+                        className="mt-6 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 transition"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
                         Get Started
-                    </button>
-                </div>
-                <div className="absolute right-0 top-0 w-[619px] flex justify-center">
+                    </motion.button>
+                </motion.div>
+
+                {/* Right Image */}
+                <motion.div
+                    className="absolute right-0 top-0 w-[619px] flex justify-center"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+                >
                     <img src={image1} alt="Project Planning" className="w-full h-full" />
-                </div>
+                </motion.div>
             </div>
             <WhyChooseUs />
             <Step1Download />
