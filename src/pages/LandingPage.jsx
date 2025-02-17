@@ -103,7 +103,8 @@ const Step2Upload = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto p-12 bg-white rounded-2xl flex justify-between items-center">
+        <div className=" w-full max-w-8xl bg-gray-100 mx-auto p-12 flex items-center">
+            <div className="max-w-6xl mx-auto flex items-center">
             {/* Left Content */}
             <div className="w-2/3">
                 <h2 className="text-lg font-semibold text-gray-700">Step 2</h2>
@@ -144,6 +145,7 @@ const Step2Upload = () => {
             {/* Right Image */}
             <div className="w-1/3 flex justify-end">
                 <img src={step2Image} alt="Discussion Illustration" className="w-full h-auto" />
+            </div>
             </div>
         </div>
     );
