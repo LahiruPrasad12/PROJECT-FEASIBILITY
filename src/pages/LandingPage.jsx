@@ -1,8 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import image1 from "../assets/images/img1.jpg"; // Replace with actual path
 import prfImage from "../assets/images/profileImage.png"; // Replace with actual path
 import HDimg from "../assets/images/header.png"; // Replace with actual path
-import step1Image from "../assets/images/sideIMG2.png"; // Replace with actual path
+import step1Image from "../assets/images/sideIMG1.jpg"; // Replace with actual path
+import { Upload } from "lucide-react";
+import step2Image from "../assets/images/sideIMG2.png"; // Replace with actual image path
 
 const Header = () => {
     return (
@@ -44,6 +46,7 @@ const WhyChooseUs = () => {
 };
 
 const Step1Download = () => {
+
     return (
         <div className="flex flex-col items-start p-12 bg-white w-full max-w-7xl mx-auto">
             {/* Title Section */}
@@ -92,6 +95,62 @@ const Step1Download = () => {
     );
 };
 
+const Step2Upload = () => {
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+    };
+
+    return (
+        <div className="max-w-7xl mx-auto p-12 bg-white rounded-2xl flex justify-between items-center">
+            {/* Left Content */}
+            <div className="w-2/3">
+                <h2 className="text-lg font-semibold text-gray-700">Step 2</h2>
+                <h3 className="text-4xl font-extrabold text-gray-900 mt-2 mb-4">
+                    Upload Project Proposal Template
+                </h3>
+                <strong className="text-gray-700 space-y-5 text-lg leading-relaxed mt-4">
+                    Now that you have filled out the project proposal template, follow these steps to upload it:
+                </strong>
+                <ul className="text-gray-700 space-y-4 text-lg leading-relaxed mt-2">
+                    <li>
+                        <strong>Select Your File</strong> - Click the Upload button
+                        below and choose the completed proposal form from your device.
+                    </li>
+                    <li>
+                        <strong>Verify Your Upload</strong> - Ensure the correct file is
+                        selected before proceeding.
+                    </li>
+                    <li>
+                        <strong>Submit & Continue</strong> - Click Submit to upload your
+                        proposal and move to the next step.
+                    </li>
+                </ul>
+                <div className="mt-6 flex space-x-4">
+                    <label className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md cursor-pointer flex items-center gap-2">
+                        <Upload size={16} /> Upload Form
+                        <input type="file" className="hidden" onChange={handleFileChange} />
+                    </label>
+                    <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md">
+                        Go to Step 3
+                    </button>
+                </div>
+                {selectedFile && (
+                    <p className="text-sm text-green-600 mt-2">Selected file: {selectedFile.name}</p>
+                )}
+            </div>
+
+            {/* Right Image */}
+            <div className="w-1/3 flex justify-end">
+                <img src={step2Image} alt="Discussion Illustration" className="w-full h-auto" />
+            </div>
+        </div>
+    );
+};
+
+
+
 const ProjectPlanning = () => {
     return (
         <div className="relative min-h-screen bg-white flex flex-col items-center justify-center pt-20">
@@ -114,6 +173,7 @@ const ProjectPlanning = () => {
             </div>
             <WhyChooseUs />
             <Step1Download />
+            <Step2Upload />
         </div>
     );
 };
