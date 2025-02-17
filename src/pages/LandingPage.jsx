@@ -37,24 +37,50 @@ const Header = () => {
 
 const WhyChooseUs = () => {
     return (
-        <section className="w-full bg-gray-100 text-center py-10 px-6 md:px-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Why Choose Us?</h2>
-            <p className="text-gray-700 max-w-4xl mx-auto text-lg leading-relaxed">
+        <motion.section
+            className="w-full bg-gray-100 text-center py-10 px-6 md:px-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }} // Triggers when 20% of the section is in view
+        >
+            <motion.h2
+                className="text-2xl font-bold text-gray-900 mb-4"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                viewport={{ once: true }}
+            >
+                Why Choose Us?
+            </motion.h2>
+
+            <motion.p
+                className="text-gray-700 max-w-4xl mx-auto text-lg leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+                viewport={{ once: true }}
+            >
                 Conduct a comprehensive feasibility analysis to assess financial, organizational, technical,
                 and operational viability before investing. Leverage advanced OCR technology for precise
                 smart information extraction, ensuring key project details are captured accurately. Enjoy
                 seamless integration with your existing systems for smooth workflow management.
                 Designed for business analysts and project managers, this solution enables fast, accurate
                 decision-making in high-pressure environments.
-            </p>
-        </section>
+            </motion.p>
+        </motion.section>
     );
 };
 
 const Step1Download = () => {
-
     return (
-        <div className="flex flex-col items-start p-12 bg-white w-full max-w-7xl mx-auto">
+        <motion.div
+            className="flex flex-col items-start p-12 bg-white w-full max-w-7xl mx-auto"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }} // Triggers when 20% of the section is in view
+        >
             {/* Title Section */}
             <h3 className="text-gray-700 text-lg font-medium">Step 1</h3>
             <h2 className="text-4xl font-extrabold text-gray-900 mt-2">
@@ -64,16 +90,24 @@ const Step1Download = () => {
             {/* Main Content Section */}
             <div className="flex flex-col md:flex-row items-center w-full mt-6">
                 {/* Left Side - Image */}
-                <div className="md:w-1/2 flex justify-center">
-                    <img
-                        src={step1Image}
-                        alt="Team Collaboration"
-                        className="w-96 h-auto"
-                    />
-                </div>
+                <motion.div
+                    className="md:w-1/2 flex justify-center"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                    viewport={{ once: true }}
+                >
+                    <img src={step1Image} alt="Team Collaboration" className="w-96 h-auto" />
+                </motion.div>
 
                 {/* Right Side - Text Content */}
-                <div className="md:w-1/2 text-left md:pl-12">
+                <motion.div
+                    className="md:w-1/2 text-left md:pl-12"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+                    viewport={{ once: true }}
+                >
                     <ul className="text-gray-700 space-y-4 text-lg leading-relaxed">
                         <li>
                             <strong>Download the Template</strong> – Click the Download button below to get the project proposal form.
@@ -88,16 +122,24 @@ const Step1Download = () => {
 
                     {/* Buttons */}
                     <div className="mt-6 flex space-x-6">
-                        <button className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 text-lg">
+                        <motion.button
+                            className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 text-lg"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             Download Form
-                        </button>
-                        <button className="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-orange-600 text-lg">
+                        </motion.button>
+                        <motion.button
+                            className="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-orange-600 text-lg"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             Go to Step 2
-                        </button>
+                        </motion.button>
                     </div>
-                </div>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
@@ -109,10 +151,22 @@ const Step2Upload = () => {
     };
 
     return (
-        <div className=" w-full max-w-8xl bg-gray-100 mx-auto p-12 flex items-center">
+        <motion.div
+            className="w-full max-w-8xl bg-gray-100 mx-auto p-12 flex items-center"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+        >
             <div className="max-w-6xl mx-auto flex items-center">
                 {/* Left Content */}
-                <div className="w-2/3">
+                <motion.div
+                    className="w-2/3"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                    viewport={{ once: true }}
+                >
                     <h2 className="text-lg font-semibold text-gray-700">Step 2</h2>
                     <h3 className="text-4xl font-extrabold text-gray-900 mt-2 mb-4">
                         Upload Project Proposal Template
@@ -135,47 +189,92 @@ const Step2Upload = () => {
                         </li>
                     </ul>
                     <div className="mt-6 flex space-x-4">
-                        <label className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md cursor-pointer flex items-center gap-2">
+                        <motion.label
+                            className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md cursor-pointer flex items-center gap-2"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             <Upload size={16} /> Upload Form
                             <input type="file" className="hidden" onChange={handleFileChange} />
-                        </label>
-                        <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md">
+                        </motion.label>
+                        <motion.button
+                            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             Go to Step 3
-                        </button>
+                        </motion.button>
                     </div>
                     {selectedFile && (
                         <p className="text-sm text-green-600 mt-2">Selected file: {selectedFile.name}</p>
                     )}
-                </div>
+                </motion.div>
 
                 {/* Right Image */}
-                <div className="w-1/3 flex justify-end">
+                <motion.div
+                    className="w-1/3 flex justify-end"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+                    viewport={{ once: true }}
+                >
                     <img src={step2Image} alt="Discussion Illustration" className="w-full h-auto" />
-                </div>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
 const Step3Quizz = () => {
     return (
-        <div className="flex flex-col items-start p-12 bg-white w-full max-w-7xl mx-auto">
+        <motion.div
+            className="flex flex-col items-start p-12 bg-white w-full max-w-7xl mx-auto"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+        >
             {/* Title Section (Spans Full Width, Centered) */}
-            <h3 className="text-gray-700 text-lg font-medium">Step 3</h3>
-            <h2 className="text-4xl font-extrabold text-gray-900 mt-2">
+            <motion.h3
+                className="text-gray-700 text-lg font-medium"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                viewport={{ once: true }}
+            >
+                Step 3
+            </motion.h3>
+            <motion.h2
+                className="text-4xl font-extrabold text-gray-900 mt-2"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+                viewport={{ once: true }}
+            >
                 Feasibility Assessment Quizzes
-            </h2>
-
+            </motion.h2>
 
             {/* Content Section */}
             <div className="flex justify-between items-start mt-5">
                 {/* Left Image Section */}
-                <div className="w-1/3 p-2">
+                <motion.div
+                    className="w-1/3 p-2"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+                    viewport={{ once: true }}
+                >
                     <img src={step3Image} alt="Quiz Illustration" className="w-full h-auto rounded-md" />
-                </div>
+                </motion.div>
 
                 {/* Right Text Section */}
-                <div className="w-2/3 pl-12">
+                <motion.div
+                    className="w-2/3 pl-12"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+                    viewport={{ once: true }}
+                >
                     <p className="text-gray-600">
                         Now that your project proposal is submitted, it's time to assess feasibility through four short quizzes.
                         Follow these steps:
@@ -205,16 +304,19 @@ const Step3Quizz = () => {
 
                     {/* Start Quiz Button */}
                     <div className="mt-6">
-                        <button className="bg-black text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold hover:bg-gray-800">
+                        <motion.button
+                            className="bg-black text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold hover:bg-gray-800"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             Start Quiz
-                        </button>
+                        </motion.button>
                     </div>
-                </div>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 };
-
 
 const Footer = () => {
     return (
