@@ -4,16 +4,16 @@ import { AuthGuard, ProtectedRoute } from "../guards/Authguard";
 
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Landing from "../pages/LandingPage";
+import Home from "../pages/Home";
 import Quizz from "../pages/Quizz";
 
 
 const router = createBrowserRouter([
   {
-    path: "/dashboard",
+    path: "/home",
     element: (
       <AuthGuard>
-        <Landing />
+        <Home />
       </AuthGuard>
     ),
   },
