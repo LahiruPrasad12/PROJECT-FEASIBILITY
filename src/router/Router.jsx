@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Quizz from "../pages/Quizz";
 import Dashboard from "../pages/Dashboard";
+import Projects from "../pages/Projects";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,14 @@ const router = createBrowserRouter([
     element: (
       <AuthGuard>
         <Dashboard />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/projects",
+    element: (
+      <AuthGuard>
+        <Projects />
       </AuthGuard>
     ),
   },
