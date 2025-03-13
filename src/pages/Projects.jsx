@@ -12,21 +12,36 @@ const projects = [
 
 const Body = () => {
     return (
-        <div className="p-6 flex-1">
-            {projects.map((project, index) => (
-                <div
-                    key={index}
-                    className="flex justify-between items-center bg-gray-50 p-4 mb-2 rounded-lg shadow-sm"
-                >
-                    <span className="font-semibold">{project.title}</span>
-                    <span className="text-gray-500">{project.date}</span>
-                    <div className="flex space-x-3">
-                        <button className="text-gray-600 hover:text-black"><Eye /></button>
-                        <button className="text-gray-600 hover:text-black"><Edit /></button>
-                        <button className="text-gray-600 hover:text-black"><Trash2 /></button>
-                    </div>
+        <div className="p-6 flex-1 bg-gray-100">
+            <div className="bg-white p-4 rounded-lg shadow-md">
+                <h2 className="text-xl font-semibold text-gray-700 mb-4">Project List</h2>
+
+                <div className="space-y-3">
+                    {projects.map((project, index) => (
+                        <div
+                            key={index}
+                            className="p-4 bg-gray-50 border rounded-lg flex flex-col sm:flex-row sm:items-center justify-between shadow-sm hover:shadow-md transition-all"
+                        >
+                            <div>
+                                <p className="text-lg font-medium text-gray-800">{project.title}</p>
+                                <p className="text-sm text-gray-500">{project.date}</p>
+                            </div>
+
+                            <div className="flex space-x-3 mt-3 sm:mt-0">
+                                <button className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition">
+                                    <Eye className="text-gray-600" />
+                                </button>
+                                <button className="p-2 rounded-lg bg-gray-200 hover:bg-blue-300 transition">
+                                    <Edit className="text-gray-600" />
+                                </button>
+                                <button className="p-2 rounded-lg bg-gray-200 hover:bg-red-300 transition">
+                                    <Trash2 className="text-gray-600" />
+                                </button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            </div>
         </div>
     );
 };
