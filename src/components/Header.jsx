@@ -5,7 +5,7 @@ export default function Header() {
     return (
         <div className="flex justify-between items-center p-5 bg-gray-100 shadow-sm">
             <div>
-                <h1 className="text-2xl font-bold text-gray-700">Dashboard</h1>
+                <h1 className="text-2xl font-bold text-gray-700">Account</h1>
                 <p className="text-sm text-gray-500">08th February 2024</p>
             </div>
             <div className="relative">

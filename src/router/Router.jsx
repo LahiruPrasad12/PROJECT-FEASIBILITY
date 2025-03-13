@@ -8,6 +8,7 @@ import Home from "../pages/Home";
 import Quizz from "../pages/Quizz";
 import Dashboard from "../pages/Dashboard";
 import Projects from "../pages/Projects";
+import Account from "../pages/Account";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
     element: (
       <AuthGuard>
         <Projects />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/account",
+    element: (
+      <AuthGuard>
+        <Account />
       </AuthGuard>
     ),
   },
