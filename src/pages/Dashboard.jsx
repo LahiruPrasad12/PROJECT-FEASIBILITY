@@ -1,31 +1,48 @@
-import { useState } from "react";
-import { FaSearch, FaThLarge, FaProjectDiagram, FaUser } from "react-icons/fa";
+import React from "react";
 import Header from "../components/Header";
 import NavBar from "../components/Navbar";
 
-const Card = ({ title, status, color }) => (
-  <div className="bg-white p-8 rounded-xl shadow-lg text-center flex-1 transition-all duration-300 hover:shadow-xl">
-    <h3 className="text-lg font-bold text-orange-500">{title}</h3>
-    <span className={`mt-3 inline-block px-6 py-3 text-white rounded-full ${color}`}>{status}</span>
-  </div>
-);
-
 const Body = () => (
-  <div className="p-6 flex flex-col gap-8 bg-gray-100">
-    <h2 className="text-xl font-bold text-gray-700">Latest Report</h2>
-    <div className="flex gap-6 justify-center w-full">
-      <Card title="Organizational Feasibility" status="Highly Feasible" color="bg-green-500" />
-      <Card title="Technical Feasibility" status="Moderately Feasible" color="bg-blue-500" />
-      <Card title="Operational Feasibility" status="Marginally Feasible" color="bg-orange-500" />
-      <Card title="Financial Feasibility" status="Not Feasible" color="bg-red-500" />
-    </div>
-    <div className="bg-white p-6 rounded-xl shadow-lg w-full flex justify-between items-center transition-all duration-300 hover:shadow-xl">
-      <div>
-        <h3 className="text-orange-500 font-bold text-lg">Secure Digital Banking Platform</h3>
-        <p className="text-4xl font-bold text-gray-800">42%</p>
-        <p className="text-orange-500 font-semibold mt-2 cursor-pointer hover:underline">Recommendations -&gt;</p>
+  <div className="p-6 bg-gray-100 min-h-screen">
+    {/* Top Metrics */}
+    <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="bg-white p-4 rounded-lg shadow-md text-center col-span-1 h-62 flex flex-col justify-center">
+        <p className="text-red-500 font-semibold">Total Projects</p>
+        <p className="text-4xl font-bold">3</p>
       </div>
-      <span className="px-4 py-2 bg-green-500 text-white rounded-full text-sm font-semibold">Highly Feasible</span>
+      <div className="grid grid-cols-3 gap-4 col-span-3">
+        <div className="bg-white p-4 rounded-lg shadow-md text-center h-32 flex flex-col justify-center">
+          <p className="text-green-600 font-semibold">Highly Feasible Projects</p>
+          <p className="text-3xl font-bold">1</p>
+        </div>
+        <div className="bg-white p-4 rounded-lg shadow-md text-center h-32 flex flex-col justify-center">
+          <p className="text-blue-600 font-semibold">Moderately Feasible Projects</p>
+          <p className="text-3xl font-bold">1</p>
+        </div>
+        <div className="bg-white p-4 rounded-lg shadow-md text-center h-32 flex flex-col justify-center">
+          <p className="text-yellow-500 font-semibold">Marginally Feasible Projects</p>
+          <p className="text-3xl font-bold">1</p>
+        </div>
+        <div className="bg-white p-4 rounded-lg shadow-md text-center h-32 flex flex-col justify-center col-span-3">
+          <p className="text-red-500 font-semibold">Not Feasible Projects</p>
+          <p className="text-3xl font-bold">0</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Latest Report */}
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="flex justify-between items-center mb-2">
+        <p className="font-semibold">Latest Report</p>
+        <p className="text-gray-500 text-sm">09/02/2025</p>
+      </div>
+      <div className="p-4 bg-gray-100 rounded-lg flex justify-between items-center">
+        <div>
+          <p className="text-red-500 font-semibold">Secure digital banking platform</p>
+          <p className="text-4xl font-bold">42%</p>
+        </div>
+        <span className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm">Highly Feasible</span>
+      </div>
     </div>
   </div>
 );
