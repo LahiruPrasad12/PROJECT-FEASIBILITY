@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaSearch, FaThLarge, FaProjectDiagram, FaUser, FaBars, FaTimes } from "react-icons/fa";
+import { FaSearch, FaThLarge, FaProjectDiagram, FaUser, FaBars, FaTimes, FaHistory } from "react-icons/fa";
 import prfImage from "../assets/images/profileImage.png"; // Replace with actual path
 
 export default function Navbar() {
@@ -37,6 +37,9 @@ export default function Navbar() {
           <button className="flex items-center gap-3 p-3 bg-gray-200 rounded-md transition duration-300 ease-in-out hover:bg-gray-300">
             <FaUser /> Account
           </button>
+          <button className="flex items-center gap-3 p-3 bg-gray-200 rounded-md transition duration-300 ease-in-out hover:bg-gray-300">
+            <FaHistory /> History
+          </button>
         </nav>
       </div>
 
@@ -58,6 +61,10 @@ export default function Navbar() {
         <button className="flex flex-col items-center text-gray-700">
           <FaUser />
           <span className="text-xs">Account</span>
+        </button>
+        <button className="flex flex-col items-center text-gray-700">
+          <FaUser />
+          <span className="text-xs">History</span>
         </button>
       </div>
     </>

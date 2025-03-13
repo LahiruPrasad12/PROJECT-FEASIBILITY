@@ -9,6 +9,7 @@ import Quizz from "../pages/Quizz";
 import Dashboard from "../pages/Dashboard";
 import Projects from "../pages/Projects";
 import Account from "../pages/Account";
+import History from "../pages/History";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,14 @@ const router = createBrowserRouter([
     element: (
       <AuthGuard>
         <Account />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/history",
+    element: (
+      <AuthGuard>
+        <History />
       </AuthGuard>
     ),
   },
