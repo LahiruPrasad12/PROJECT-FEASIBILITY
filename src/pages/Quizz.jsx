@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { FaCheckSquare } from "react-icons/fa";
+import { FaCheckSquare, FaCheckCircle } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { FaCheckCircle } from "react-icons/fa";
 
 const FeasibilityAssessment = () => {
   const [selected, setSelected] = useState("organizational");
@@ -23,14 +22,14 @@ const FeasibilityAssessment = () => {
   };
 
   return (
-    <div className="flex gap-8 p-8 bg-gray-100 min-h-screen items-center justify-center">
+    <div className="flex flex-col md:flex-row gap-6 p-6 md:p-8 bg-gray-100 min-h-screen items-center justify-center">
       {/* Left Section */}
-      <div className="flex flex-col gap-4 bg-white p-6 rounded-2xl shadow-lg">
+      <div className="flex flex-col gap-4 bg-white p-4 md:p-6 rounded-2xl shadow-lg w-full max-w-xs md:max-w-sm">
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => setSelected(category)}
-            className={`flex items-center justify-between w-64 px-4 py-3 text-lg font-semibold border-2 transition rounded-lg shadow-md ${
+            className={`flex items-center justify-between w-full px-4 py-3 text-lg font-semibold border-2 transition rounded-lg shadow-md ${
               selected === category ? "border-blue-500 bg-white" : "bg-gray-200 hover:bg-gray-300"
             }`}
           >
@@ -42,11 +41,13 @@ const FeasibilityAssessment = () => {
             )}
           </button>
         ))}
-        <button className="w-full py-3 text-lg bg-red-400 hover:bg-red-500 transition text-white font-semibold rounded-lg shadow-md">Submit</button>
+        <button className="w-full py-3 text-lg bg-red-400 hover:bg-red-500 transition text-white font-semibold rounded-lg shadow-md">
+          Submit
+        </button>
       </div>
 
       {/* Right Section */}
-      <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md">
+      <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg w-full max-w-xs md:max-w-md">
         {[...Array(5)].map((_, i) => (
           <div key={i} className="mb-4">
             <p className="font-semibold">Question {i + 1}</p>
