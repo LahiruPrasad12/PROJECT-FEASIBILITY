@@ -16,8 +16,8 @@ const Header = () => {
     return (
         <header className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white shadow-md z-50">
             <div className="flex items-center gap-2">
-                <img src={HDimg} alt="Logo" className="w-10 h-10 rounded-full" />
-                <span className="text-2xl font-bold">
+                <img src={HDimg} alt="Logo" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full" />
+                <span className="text-xl sm:text-2xl font-bold">
                     <span className="text-black">S</span>
                     <span className="text-orange-500">D</span>
                     <span className="text-black">S</span>
@@ -25,27 +25,28 @@ const Header = () => {
                 </span>
             </div>
             <div className="flex items-center gap-2">
-                <img src={prfImage} alt="User" className="w-10 h-10 rounded-full" />
-                <div>
-                    <p className="text-gray-900 font-medium">Shanki Mandeera</p>
-                    <p className="text-gray-500 text-sm">User</p>
+                <img src={prfImage} alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full" />
+                <div className="hidden sm:block">
+                    <p className="text-gray-900 font-medium text-sm sm:text-base">Shanki Mandeera</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">User</p>
                 </div>
             </div>
         </header>
     );
 };
 
+
 const WhyChooseUs = () => {
     return (
         <motion.section
-            className="w-full bg-gray-100 text-center py-10 px-6 md:px-12"
+            className="w-full bg-gray-100 text-center py-8 px-4 sm:px-6 md:px-12"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }} // Triggers when 20% of the section is in view
         >
             <motion.h2
-                className="text-2xl font-bold text-gray-900 mb-4"
+                className="text-xl sm:text-2xl font-bold text-gray-900 mb-4"
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
@@ -55,7 +56,7 @@ const WhyChooseUs = () => {
             </motion.h2>
 
             <motion.p
-                className="text-gray-700 max-w-4xl mx-auto text-lg leading-relaxed"
+                className="text-gray-700 max-w-2xl sm:max-w-3xl mx-auto text-base sm:text-lg leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
@@ -72,18 +73,19 @@ const WhyChooseUs = () => {
     );
 };
 
+
 const Step1Download = () => {
     return (
         <motion.div
-            className="flex flex-col items-start p-12 bg-white w-full max-w-7xl mx-auto"
+            className="flex flex-col items-start p-6 sm:p-8 md:p-12 bg-white w-full max-w-7xl mx-auto"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.2 }} // Triggers when 20% of the section is in view
+            viewport={{ once: true, amount: 0.2 }}
         >
             {/* Title Section */}
-            <h3 className="text-gray-700 text-lg font-medium">Step 1</h3>
-            <h2 className="text-4xl font-extrabold text-gray-900 mt-2">
+            <h3 className="text-gray-700 text-base sm:text-lg font-medium">Step 1</h3>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mt-2">
                 Download Project Proposal Template
             </h2>
 
@@ -97,18 +99,18 @@ const Step1Download = () => {
                     transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                     viewport={{ once: true }}
                 >
-                    <img src={step1Image} alt="Team Collaboration" className="w-96 h-auto" />
+                    <img src={step1Image} alt="Team Collaboration" className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto" />
                 </motion.div>
 
                 {/* Right Side - Text Content */}
                 <motion.div
-                    className="md:w-1/2 text-left md:pl-12"
+                    className="md:w-1/2 text-left md:pl-8 mt-6 md:mt-0"
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
                     viewport={{ once: true }}
                 >
-                    <ul className="text-gray-700 space-y-4 text-lg leading-relaxed">
+                    <ul className="text-gray-700 space-y-4 text-sm sm:text-base md:text-lg leading-relaxed">
                         <li>
                             <strong>Download the Template</strong> – Click the Download button below to get the project proposal form.
                         </li>
@@ -121,16 +123,16 @@ const Step1Download = () => {
                     </ul>
 
                     {/* Buttons */}
-                    <div className="mt-6 flex space-x-6">
+                    <div className="mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
                         <motion.button
-                            className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 text-lg"
+                            className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 text-sm sm:text-lg w-full sm:w-auto"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
                             Download Form
                         </motion.button>
                         <motion.button
-                            className="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-orange-600 text-lg"
+                            className="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-orange-600 text-sm sm:text-lg w-full sm:w-auto"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -143,6 +145,7 @@ const Step1Download = () => {
     );
 };
 
+
 const Step2Upload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
 
@@ -152,29 +155,29 @@ const Step2Upload = () => {
 
     return (
         <motion.div
-            className="w-full max-w-8xl bg-gray-100 mx-auto p-12 flex items-center"
+            className="w-full max-w-8xl bg-gray-100 mx-auto p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}
         >
-            <div className="max-w-6xl mx-auto flex items-center">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center w-full">
                 {/* Left Content */}
                 <motion.div
-                    className="w-2/3"
+                    className="w-full md:w-2/3 text-center md:text-left"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-lg font-semibold text-gray-700">Step 2</h2>
-                    <h3 className="text-4xl font-extrabold text-gray-900 mt-2 mb-4">
+                    <h2 className="text-base sm:text-lg font-semibold text-gray-700">Step 2</h2>
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-4">
                         Upload Project Proposal Template
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-sm sm:text-base">
                         Now that you have filled out the project proposal template, follow these steps to upload it:
                     </p>
-                    <ul className="list-none text-gray-600 mt-4 space-y-3">
+                    <ul className="list-none text-gray-600 mt-4 space-y-3 text-sm sm:text-base">
                         <li>
                             <strong>Select Your File</strong> - Click the Upload button
                             below and choose the completed proposal form from your device.
@@ -188,9 +191,9 @@ const Step2Upload = () => {
                             proposal and move to the next step.
                         </li>
                     </ul>
-                    <div className="mt-6 flex space-x-4">
+                    <div className="mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                         <motion.label
-                            className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md cursor-pointer flex items-center gap-2"
+                            className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md cursor-pointer flex items-center justify-center gap-2 w-full sm:w-auto"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -198,7 +201,7 @@ const Step2Upload = () => {
                             <input type="file" className="hidden" onChange={handleFileChange} />
                         </motion.label>
                         <motion.button
-                            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md"
+                            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md w-full sm:w-auto"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -212,13 +215,13 @@ const Step2Upload = () => {
 
                 {/* Right Image */}
                 <motion.div
-                    className="w-1/3 flex justify-end"
+                    className="w-full md:w-1/3 flex justify-center md:justify-end mt-6 md:mt-0"
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
                     viewport={{ once: true }}
                 >
-                    <img src={step2Image} alt="Discussion Illustration" className="w-full h-auto" />
+                    <img src={step2Image} alt="Discussion Illustration" className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto" />
                 </motion.div>
             </div>
         </motion.div>
@@ -228,15 +231,15 @@ const Step2Upload = () => {
 const Step3Quizz = () => {
     return (
         <motion.div
-            className="flex flex-col items-start p-12 bg-white w-full max-w-7xl mx-auto"
+            className="flex flex-col items-center p-6 sm:p-8 md:p-12 bg-white w-full max-w-7xl mx-auto"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}
         >
-            {/* Title Section (Spans Full Width, Centered) */}
+            {/* Title Section */}
             <motion.h3
-                className="text-gray-700 text-lg font-medium"
+                className="text-gray-700 text-base sm:text-lg font-medium"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
@@ -245,7 +248,7 @@ const Step3Quizz = () => {
                 Step 3
             </motion.h3>
             <motion.h2
-                className="text-4xl font-extrabold text-gray-900 mt-2"
+                className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 text-center"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
@@ -255,39 +258,39 @@ const Step3Quizz = () => {
             </motion.h2>
 
             {/* Content Section */}
-            <div className="flex justify-between items-start mt-5">
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-start mt-5 w-full">
                 {/* Left Image Section */}
                 <motion.div
-                    className="w-1/3 p-2"
+                    className="w-full md:w-1/3 p-2 flex justify-center md:justify-start"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
                     viewport={{ once: true }}
                 >
-                    <img src={step3Image} alt="Quiz Illustration" className="w-full h-auto rounded-md" />
+                    <img src={step3Image} alt="Quiz Illustration" className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto rounded-md" />
                 </motion.div>
 
                 {/* Right Text Section */}
                 <motion.div
-                    className="w-2/3 pl-12"
+                    className="w-full md:w-2/3 md:pl-8 text-center md:text-left mt-6 md:mt-0"
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
                     viewport={{ once: true }}
                 >
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-sm sm:text-base">
                         Now that your project proposal is submitted, it's time to assess feasibility through four short quizzes.
                         Follow these steps:
                     </p>
 
                     {/* Instructions List */}
-                    <ul className="list-none text-gray-600 mt-4 space-y-3">
+                    <ul className="list-none text-gray-600 mt-4 space-y-3 text-sm sm:text-base">
                         <li>
                             <span className="font-semibold">1. Start the Quiz</span> – Click the Start Quiz button below to begin.
                         </li>
                         <li>
                             <span className="font-semibold">2. Answer All Four Quizzes</span> – You will face questions on:
-                            <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
+                            <ul className="list-disc list-inside ml-4 sm:ml-6 mt-2 space-y-1">
                                 <li>Organizational Feasibility</li>
                                 <li>Technical Feasibility</li>
                                 <li>Operational Feasibility</li>
@@ -303,9 +306,9 @@ const Step3Quizz = () => {
                     </ul>
 
                     {/* Start Quiz Button */}
-                    <div className="mt-6">
+                    <div className="mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                         <motion.button
-                            className="bg-black text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold hover:bg-gray-800"
+                            className="bg-black text-white px-6 py-3 w-full sm:w-auto rounded-lg shadow-md text-lg font-semibold hover:bg-gray-800"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -318,27 +321,28 @@ const Step3Quizz = () => {
     );
 };
 
+
 const Footer = () => {
     return (
-        <footer className="w-full bg-gray-100 py-6 px-6 md:px-12">
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <footer className="w-full bg-gray-100 py-6 px-4 sm:px-8 md:px-12">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                 {/* Left side: Copyright */}
-                <p className="text-gray-700">
-                    Copyright @2025 <span className="text-orange-500 font-semibold">SDSN</span>
+                <p className="text-gray-700 mb-4 md:mb-0">
+                    Copyright © 2025 <span className="text-orange-500 font-semibold">SDSN</span>
                 </p>
 
                 {/* Right side: Social icons */}
-                <div className="flex space-x-4 text-black text-xl">
-                    <a href="#" aria-label="Facebook">
+                <div className="flex space-x-6 text-black text-xl">
+                    <a href="#" aria-label="Facebook" className="hover:text-blue-600 transition">
                         <FontAwesomeIcon icon={faFacebook} />
                     </a>
-                    <a href="#" aria-label="Instagram">
+                    <a href="#" aria-label="Instagram" className="hover:text-pink-500 transition">
                         <FontAwesomeIcon icon={faInstagram} />
                     </a>
-                    <a href="#" aria-label="WhatsApp">
+                    <a href="#" aria-label="WhatsApp" className="hover:text-green-500 transition">
                         <FontAwesomeIcon icon={faWhatsapp} />
                     </a>
-                    <a href="#" aria-label="Email">
+                    <a href="#" aria-label="Email" className="hover:text-gray-700 transition">
                         <FontAwesomeIcon icon={faEnvelope} />
                     </a>
                 </div>
@@ -351,20 +355,20 @@ const Footer = () => {
 
 const ProjectPlanning = () => {
     return (
-        <div className="relative min-h-screen bg-white flex flex-col items-center justify-center pt-20">
+        <div className="relative min-h-screen bg-white flex flex-col items-center pt-20">
             <Header />
-            <div className="relative w-[1300px] h-[550px] flex items-center justify-center">
+            <div className="relative w-full max-w-7xl flex flex-col md:flex-row items-center justify-between px-4 md:px-12">
                 {/* Left Content (Text + Button) */}
                 <motion.div
-                    className="absolute left-0 top-12 w-[657px] px-6 md:px-12"
+                    className="w-full md:w-1/2 text-center md:text-left"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut" }}
                 >
-                    <h1 className="font-poppins font-extrabold text-[50px] leading-[75px] text-gray-900">
+                    <h1 className="font-poppins font-extrabold text-3xl md:text-5xl leading-tight text-gray-900">
                         Smarter Project Planning
                     </h1>
-                    <h2 className="font-poppins font-extrabold text-[50px] leading-[75px] text-orange-500 mt-2">
+                    <h2 className="font-poppins font-extrabold text-3xl md:text-5xl text-orange-500 mt-2">
                         Starts with the Right Feasibility Check
                     </h2>
                     <motion.button
@@ -378,12 +382,12 @@ const ProjectPlanning = () => {
 
                 {/* Right Image */}
                 <motion.div
-                    className="absolute right-0 top-0 w-[619px] flex justify-center"
+                    className="w-full md:w-1/2 flex justify-center mt-6 md:mt-0"
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
                 >
-                    <img src={image1} alt="Project Planning" className="w-full h-full" />
+                    <img src={image1} alt="Project Planning" className="w-full max-w-xs md:max-w-md h-auto" />
                 </motion.div>
             </div>
             <WhyChooseUs />
@@ -394,5 +398,6 @@ const ProjectPlanning = () => {
         </div>
     );
 };
+
 
 export default ProjectPlanning;
