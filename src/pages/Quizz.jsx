@@ -2,15 +2,21 @@ import { useState } from "react";
 import axios from "axios";
 import { FaCheckSquare, FaCheckCircle } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FeasibilityAssessment = () => {
   const [selectedCategory, setSelectedCategory] = useState("Organizational Feasibility");
   const [currentPage, setCurrentPage] = useState(0);
   const [answers, setAnswers] = useState(Array(20).fill(""));
-  
+
+  const storedUser = localStorage.getItem("user");
+  const userData = JSON.parse(storedUser);
+  const file_name = localStorage.getItem("file_name")
+
   const categories = ["Organizational Feasibility", "Operational Feasibility"];
   const questionsPerPage = 5;
-  
+
   const questions = {
     "Organizational Feasibility": [
       "How well does this project align with the organization’s strategic goals?",
@@ -67,9 +73,14 @@ const FeasibilityAssessment = () => {
   };
 
   const handleSubmit = async () => {
-    const payload = {};
+    const payload = {
+      file_name: file_name,
+      email: userData.email,
+      ans: {} // Change from array to object
+    };
+
     answers.forEach((answer, index) => {
-      payload[`Q${index + 1}`] = answer || "N/A";
+      payload.ans[`Q${index + 1}`] = answer || "N/A"; // Assign dynamically
     });
 
     const apiUrl = selectedCategory === "Organizational Feasibility"
@@ -81,10 +92,11 @@ const FeasibilityAssessment = () => {
         headers: { "Content-Type": "application/json" },
       });
       console.log("API Response:", response.data);
-      alert("Assessment submitted successfully!");
+      // alert("Assessment submitted successfully!");
+      toast.success("Assessment submitted successfully!");
     } catch (error) {
       console.error("Submission failed:", error);
-      alert("Failed to submit assessment. Please try again.");
+      toast.error("Failed to submit assessment. Please try again.");
     }
   };
 
@@ -99,9 +111,8 @@ const FeasibilityAssessment = () => {
           <button
             key={category}
             onClick={() => { setSelectedCategory(category); setCurrentPage(0); }}
-            className={`flex items-center justify-between w-full px-4 py-3 text-lg font-semibold border-2 transition rounded-lg shadow-md ${
-              selectedCategory === category ? "border-blue-500 bg-white" : "bg-gray-200 hover:bg-gray-300"
-            }`}
+            className={`flex items-center justify-between w-full px-4 py-3 text-lg font-semibold border-2 transition rounded-lg shadow-md ${selectedCategory === category ? "border-blue-500 bg-white" : "bg-gray-200 hover:bg-gray-300"
+              }`}
           >
             {category}
             {selectedCategory === category ? <FaCheckCircle className="text-red-500" /> : <FaCheckSquare className="text-gray-700" />}
