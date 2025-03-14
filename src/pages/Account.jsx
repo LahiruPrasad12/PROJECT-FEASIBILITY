@@ -121,6 +121,7 @@ const Body = () => {
                         className="w-full p-3 text-gray-600 bg-white border border-gray-300 rounded-lg outline-none"
                     />
                     <input
+                        disabled
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
