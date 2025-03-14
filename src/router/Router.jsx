@@ -15,41 +15,41 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: (
-      <AuthGuard>
+      <ProtectedRoute>
         <Home />
-      </AuthGuard>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/dashboard",
     element: (
-      <AuthGuard>
+      <ProtectedRoute>
         <Dashboard />
-      </AuthGuard>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/projects",
     element: (
-      <AuthGuard>
+      <ProtectedRoute>
         <Projects />
-      </AuthGuard>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/account",
     element: (
-      <AuthGuard>
+      <ProtectedRoute>
         <Account />
-      </AuthGuard>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/history",
     element: (
-      <AuthGuard>
+      <ProtectedRoute>
         <History />
-      </AuthGuard>
+      </ProtectedRoute>
     ),
   },
   {
@@ -71,9 +71,9 @@ const router = createBrowserRouter([
   {
     path: "/quizz",
     element: (
-      <AuthGuard>
+      <ProtectedRoute>
         <Quizz />
-      </AuthGuard>
+      </ProtectedRoute>
     ),
   },
   // {

@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-
+import axios from "axios";
 
 const Header = () => {
     return (
@@ -148,9 +148,42 @@ const Step1Download = () => {
 
 const Step2Upload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
+    const [uploading, setUploading] = useState(false);
+    const [message, setMessage] = useState("");
 
     const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
+        const file = event.target.files[0];
+        if (file && file.type === "application/pdf") {
+            setSelectedFile(file);
+            setMessage("");
+        } else {
+            setMessage("Please select a valid PDF file.");
+        }
+    };
+
+    const handleUpload = async () => {
+        if (!selectedFile) {
+            setMessage("No file selected. Please choose a PDF file to upload.");
+            return;
+        }
+
+        setUploading(true);
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+
+        try {
+            const response1 = await axios.post("http://127.0.0.1:5000/fields/technical", formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+            const response2 = await axios.post("http://127.0.0.1:5000/fields/financial", formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+            // setMessage("File uploaded successfully!");
+        } catch (error) {
+            setMessage("File upload failed. Please try again.");
+            console.error("Upload error:", error);
+        }
+        setUploading(false);
     };
 
     return (
@@ -162,7 +195,6 @@ const Step2Upload = () => {
             viewport={{ once: true, amount: 0.2 }}
         >
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center w-full">
-                {/* Left Content */}
                 <motion.div
                     className="w-full md:w-2/3 text-center md:text-left"
                     initial={{ opacity: 0, x: -50 }}
@@ -178,18 +210,9 @@ const Step2Upload = () => {
                         Now that you have filled out the project proposal template, follow these steps to upload it:
                     </p>
                     <ul className="list-none text-gray-600 mt-4 space-y-3 text-sm sm:text-base">
-                        <li>
-                            <strong>Select Your File</strong> - Click the Upload button
-                            below and choose the completed proposal form from your device.
-                        </li>
-                        <li>
-                            <strong>Verify Your Upload</strong> - Ensure the correct file is
-                            selected before proceeding.
-                        </li>
-                        <li>
-                            <strong>Submit & Continue</strong> - Click Submit to upload your
-                            proposal and move to the next step.
-                        </li>
+                        <li><strong>Select Your File</strong> - Click the Upload button and choose the completed proposal form.</li>
+                        <li><strong>Verify Your Upload</strong> - Ensure the correct file is selected before proceeding.</li>
+                        <li><strong>Submit & Continue</strong> - Click Submit to upload your proposal and move to the next step.</li>
                     </ul>
                     <div className="mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                         <motion.label
@@ -198,35 +221,26 @@ const Step2Upload = () => {
                             whileTap={{ scale: 0.95 }}
                         >
                             <Upload size={16} /> Upload Form
-                            <input type="file" className="hidden" onChange={handleFileChange} />
+                            <input type="file" className="hidden" accept="application/pdf" onChange={handleFileChange} />
                         </motion.label>
                         <motion.button
-                            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md w-full sm:w-auto"
+                            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={handleUpload}
+                            disabled={uploading || !selectedFile}
                         >
-                            Go to Step 3
+                            {uploading ? "Uploading..." : "Go to Step 3"}
                         </motion.button>
                     </div>
-                    {selectedFile && (
-                        <p className="text-sm text-green-600 mt-2">Selected file: {selectedFile.name}</p>
-                    )}
-                </motion.div>
-
-                {/* Right Image */}
-                <motion.div
-                    className="w-full md:w-1/3 flex justify-center md:justify-end mt-6 md:mt-0"
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-                    viewport={{ once: true }}
-                >
-                    <img src={step2Image} alt="Discussion Illustration" className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto" />
+                    {selectedFile && <p className="text-sm text-green-600 mt-2">Selected file: {selectedFile.name}</p>}
+                    {message && <p className="text-sm mt-2 text-red-600">{message}</p>}
                 </motion.div>
             </div>
         </motion.div>
     );
 };
+
 
 const Step3Quizz = () => {
     return (

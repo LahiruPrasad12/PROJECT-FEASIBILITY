@@ -20,7 +20,7 @@ export const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const userLoggedIn = localStorage.getItem("user");
     if (!userLoggedIn) {
-      navigate("/login");
+      navigate("/");
     }
   }, [navigate]);
 
