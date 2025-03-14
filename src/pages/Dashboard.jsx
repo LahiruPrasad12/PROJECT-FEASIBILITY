@@ -34,11 +34,35 @@ const Body = () => {
   };
 
   // Categorizing projects based on feasibility
-  const totalProjects = projects?.length;
-  const highlyFeasible = projects?.filter(p => p.feasibility === "Highly Feasible")?.length;
-  const moderatelyFeasible = projects?.filter(p => p.feasibility === "Moderately Feasible")?.length;
-  const marginallyFeasible = projects?.filter(p => p.feasibility === "Marginally Feasible")?.length;
-  const notFeasible = projects?.filter(p => p.feasibility === "Not Feasible")?.length;
+  const totalProjects = projects?.length || 0;
+  let highlyFeasibleCount = 0;
+  let moderatelyFeasibleCount = 0;
+  let marginallyFeasibleCount = 0;
+  let notFeasibleCount = 0;
+
+  projects.forEach((x) => {
+    const results = [
+      x.financial_result,
+      x.operational_result,
+      x.organizational_result,
+      x.technical_result
+    ];
+
+    const countL1 = results.filter(r => r === 'L1').length;
+    const countL2 = results.filter(r => r === 'L2').length;
+    const countL4 = results.filter(r => r === 'L4').length;
+
+    if (countL1 === 4) {
+      highlyFeasibleCount += 1;
+    } else if (countL4 > 0) {
+      notFeasibleCount += 1;
+    } else if (countL1 >= 2 && countL2 >= 2) {
+      moderatelyFeasibleCount += 1;
+    } else {
+      marginallyFeasibleCount += 1;
+    }
+  });
+
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -51,19 +75,19 @@ const Body = () => {
         <div className="grid grid-cols-3 gap-4 col-span-3">
           <div className="bg-white p-4 rounded-lg shadow-md text-center h-32 flex flex-col justify-center">
             <p className="text-green-600 font-semibold">Highly Feasible Projects</p>
-            <p className="text-3xl font-bold">{highlyFeasible}</p>
+            <p className="text-3xl font-bold">{highlyFeasibleCount}</p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md text-center h-32 flex flex-col justify-center">
             <p className="text-blue-600 font-semibold">Moderately Feasible Projects</p>
-            <p className="text-3xl font-bold">{moderatelyFeasible}</p>
+            <p className="text-3xl font-bold">{moderatelyFeasibleCount}</p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md text-center h-32 flex flex-col justify-center">
             <p className="text-yellow-500 font-semibold">Marginally Feasible Projects</p>
-            <p className="text-3xl font-bold">{marginallyFeasible}</p>
+            <p className="text-3xl font-bold">{marginallyFeasibleCount}</p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md text-center h-32 flex flex-col justify-center col-span-3">
             <p className="text-red-500 font-semibold">Not Feasible Projects</p>
-            <p className="text-3xl font-bold">{notFeasible}</p>
+            <p className="text-3xl font-bold">{notFeasibleCount}</p>
           </div>
         </div>
       </div>
