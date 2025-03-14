@@ -153,6 +153,9 @@ const Step2Upload = () => {
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState("");
 
+    const storedUser = localStorage.getItem("user");
+    const userData = JSON.parse(storedUser);
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file && file.type === "application/pdf") {
@@ -172,6 +175,8 @@ const Step2Upload = () => {
         setUploading(true);
         const formData = new FormData();
         formData.append("file", selectedFile);
+        formData.append("name", selectedFile.name.replace(".pdf", ""));
+        formData.append("email", userData.email);
 
         try {
             const response1 = await axios.post("http://127.0.0.1:5000/fields/technical", formData, {
@@ -181,6 +186,7 @@ const Step2Upload = () => {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             // setMessage("File uploaded successfully!");
+            localStorage.setItem('file_name', selectedFile.name.replace(".pdf", ""))
         } catch (error) {
             setMessage("File upload failed. Please try again.");
             console.error("Upload error:", error);
