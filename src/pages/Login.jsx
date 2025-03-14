@@ -1,7 +1,36 @@
-import React from "react";
-import logo from "../assets/logo.png"; // Replace with actual path
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import logo from "../assets/logo.png";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if (!email || !password) return;
+
+    setLoading(true);
+
+    try {
+      const { data } = await axios.post("http://127.0.0.1:5000/auth/login", {
+        email,
+        password,
+      });
+
+      toast.success("Login Successful!");
+      setLoading(false);
+      navigate("/dashboard"); // Redirect to Dashboard
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.response?.data?.message || "Invalid email or password.");
+    }
+  };
+
   return (
     <div className="w-full h-screen flex justify-center items-center bg-white px-4">
       <div className="flex flex-col md:flex-row w-full max-w-[1440px] items-center md:items-start">
@@ -13,6 +42,8 @@ const SignIn = () => {
           <input
             type="email"
             placeholder="Email..."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full md:w-[467px] h-[54px] bg-[#eaeaea] rounded-[20px] px-4 text-[18px] md:text-[21px] mb-4 outline-none"
           />
 
@@ -20,22 +51,36 @@ const SignIn = () => {
           <input
             type="password"
             placeholder="Password..."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full md:w-[467px] h-[54px] bg-[#eaeaea] rounded-[20px] px-4 text-[18px] md:text-[21px] mb-4 outline-none"
           />
 
           {/* Forgot Password */}
-          <p className="text-[16px] md:text-[20px] font-poppins text-black cursor-pointer">
+          <p className="text-[16px] md:text-[20px] text-black cursor-pointer">
             Forgot Password?
           </p>
 
           {/* Sign In Button */}
-          <button className="w-full md:w-[258px] h-[60px] bg-[#eb5e28] rounded-[20px] text-white font-bold text-[18px] mt-5">
-            Sign In
+          <button
+            onClick={handleLogin}
+            disabled={!email || !password || loading}
+            className={`w-full md:w-[258px] h-[60px] rounded-[20px] text-white font-bold text-[18px] mt-5 
+              ${!email || !password ? "bg-gray-400 cursor-not-allowed" : "bg-[#eb5e28]"} 
+              ${loading && "opacity-70 cursor-not-allowed"}`}
+          >
+            {loading ? "Loading..." : "Sign In"}
           </button>
 
           {/* Sign Up Section */}
           <p className="text-[16px] md:text-[20px] mt-5 text-black">
-            Not a member? <span className="font-extrabold text-[#eb5e28] cursor-pointer">Sign Up</span>
+            Not a member?{" "}
+            <span
+              className="font-extrabold text-[#eb5e28] cursor-pointer"
+              onClick={() => navigate("/register")}
+            >
+              Sign Up
+            </span>
           </p>
         </div>
 
