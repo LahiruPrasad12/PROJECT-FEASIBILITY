@@ -11,6 +11,8 @@ import { faFacebook, faInstagram, faWhatsapp } from "@fortawesome/free-brands-sv
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const Header = () => {
     return (
@@ -243,6 +245,12 @@ const Step2Upload = () => {
 
 
 const Step3Quizz = () => {
+    const navigate = useNavigate();
+
+    const handleStartQuiz = () => {
+        navigate("/quiz"); // Change "/quiz" to your actual quiz route
+    };
+
     return (
         <motion.div
             className="flex flex-col items-center p-6 sm:p-8 md:p-12 bg-white w-full max-w-7xl mx-auto"
@@ -325,6 +333,7 @@ const Step3Quizz = () => {
                             className="bg-black text-white px-6 py-3 w-full sm:w-auto rounded-lg shadow-md text-lg font-semibold hover:bg-gray-800"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={handleStartQuiz}
                         >
                             Start Quiz
                         </motion.button>
@@ -334,7 +343,6 @@ const Step3Quizz = () => {
         </motion.div>
     );
 };
-
 
 const Footer = () => {
     return (

@@ -69,7 +69,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/quizz",
+    path: "/quiz",
     element: (
       <ProtectedRoute>
         <Quizz />
