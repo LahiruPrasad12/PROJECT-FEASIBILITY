@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaCheckSquare, FaCheckCircle } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -9,9 +9,8 @@ const FeasibilityAssessment = () => {
   const [selectedCategory, setSelectedCategory] = useState("Organizational Feasibility");
   const [currentPage, setCurrentPage] = useState(0);
   const [answers, setAnswers] = useState(Array(20).fill(""));
+  const [email, setEmail] = useState("");
 
-  const storedUser = localStorage.getItem("user");
-  const userData = JSON.parse(storedUser);
   const file_name = localStorage.getItem("file_name")
 
   const categories = ["Organizational Feasibility", "Operational Feasibility"];
@@ -64,6 +63,15 @@ const FeasibilityAssessment = () => {
     ],
   };
 
+  useEffect(() => {
+    // Fetch user data from local storage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      setEmail(userData.email || "");
+    }
+  }, []);
+
   const handleSelect = (index, value) => {
     setAnswers((prev) => {
       const newAnswers = [...prev];
@@ -75,7 +83,7 @@ const FeasibilityAssessment = () => {
   const handleSubmit = async () => {
     const payload = {
       file_name: file_name,
-      email: userData.email,
+      email: email,
       ans: {} // Change from array to object
     };
 
