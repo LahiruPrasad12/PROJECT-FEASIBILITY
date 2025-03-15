@@ -10,6 +10,7 @@ import Dashboard from "../pages/Dashboard";
 import Projects from "../pages/Projects";
 import Account from "../pages/Account";
 import History from "../pages/History";
+import Reccomandation from "../pages/Reccomandation";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Quizz />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/recommandation",
+    element: (
+      <ProtectedRoute>
+        <Reccomandation />
       </ProtectedRoute>
     ),
   },
