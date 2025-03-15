@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Search, ArrowLeft } from "lucide-react";
 import { FaSearch } from "react-icons/fa";
 import NavBar from "../components/Navbar";
@@ -7,6 +8,13 @@ const Body = () => {
     const [search, setSearch] = useState("");
     const [fromDate, setFromDate] = useState("08/02/2025");
     const [toDate, setToDate] = useState("08/02/2025");
+    const location = useLocation();
+    const project = location.state?.project;
+
+    useEffect(() => {
+        console.log("Received Project:", project);
+    }, [project]);
+
     return (
         <div className="p-6 bg-gray-100 min-h-screen flex flex-col">
             <div className="flex justify-between items-center mb-4">

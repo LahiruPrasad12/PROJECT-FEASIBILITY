@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Search, Eye, Edit, Trash2 } from "lucide-react";
 import Header from "../components/Header";
@@ -9,6 +10,7 @@ const Body = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [email, setEmail] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Fetch user data from local storage
@@ -37,6 +39,10 @@ const Body = () => {
         fetchProjects();
     }, [email]);
 
+    const handleViewProject = (project) => {
+        navigate("/recommandation", { state: { project } });
+    };
+
     return (
         <div className="p-6 flex-1 bg-gray-100">
             <div className="bg-white p-4 rounded-lg shadow-md">
@@ -61,7 +67,7 @@ const Body = () => {
                                 </div>
 
                                 <div className="flex space-x-3 mt-3 sm:mt-0">
-                                    <button className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition">
+                                    <button onClick={() => handleViewProject(project)} className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition">
                                         <Eye className="text-gray-600" />
                                     </button>
                                     {/* <button className="p-2 rounded-lg bg-gray-200 hover:bg-blue-300 transition">
