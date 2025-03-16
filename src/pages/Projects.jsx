@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Search, Eye, Edit, Trash2 } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "../components/Header";
 import NavBar from "../components/Navbar";
 
@@ -43,6 +45,23 @@ const Body = () => {
         navigate("/recommandation", { state: { project } });
     };
 
+    const handleDeleteProject = async (file_name) => {
+        const confirmDelete = window.confirm(`Are you sure you want to delete "${file_name}"?`);
+        if (!confirmDelete) return;
+
+        try {
+            await axios.delete(`http://127.0.0.1:5000/api/projects/delete?email=${email}&file_name=${file_name}`);
+
+            // Optimistically remove project from UI
+            setProjects((prevProjects) => prevProjects.filter(project => project.file_name !== file_name));
+
+            toast.success("Project deleted successfully!");
+        } catch (error) {
+            console.error("Error deleting project:", error);
+            toast.error("Failed to delete project. Please try again.");
+        }
+    };
+
     return (
         <div className="p-6 flex-1 bg-gray-100">
             <div className="bg-white p-4 rounded-lg shadow-md">
@@ -70,10 +89,10 @@ const Body = () => {
                                     <button onClick={() => handleViewProject(project)} className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition">
                                         <Eye className="text-gray-600" />
                                     </button>
-                                    {/* <button className="p-2 rounded-lg bg-gray-200 hover:bg-blue-300 transition">
-                                        <Edit className="text-gray-600" />
-                                    </button> */}
-                                    <button className="p-2 rounded-lg bg-gray-200 hover:bg-red-300 transition">
+                                    <button 
+                                        onClick={() => handleDeleteProject(project.file_name)} 
+                                        className="p-2 rounded-lg bg-gray-200 hover:bg-red-300 transition"
+                                    >
                                         <Trash2 className="text-gray-600" />
                                     </button>
                                 </div>
