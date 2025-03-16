@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaThLarge, FaProjectDiagram, FaUser, FaBars, FaTimes, FaHistory, FaSignOutAlt } from "react-icons/fa";
+import { FaThLarge, FaProjectDiagram, FaUser, FaBars, FaTimes, FaHistory, FaSignOutAlt,FaSprayCan } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import prfImage from "../assets/images/profileImage.png"; // Replace with actual path
@@ -14,6 +14,7 @@ export default function Navbar() {
     { name: "Projects", path: "/projects", icon: <FaProjectDiagram /> },
     { name: "Account", path: "/account", icon: <FaUser /> },
     { name: "History", path: "/history", icon: <FaHistory /> },
+    { name: "Prdictions", path: "/home", icon: <FaSprayCan /> },
   ];
 
   const handleLogout = () => {
