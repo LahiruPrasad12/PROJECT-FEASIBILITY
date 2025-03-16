@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { FaThLarge, FaProjectDiagram, FaUser, FaBars, FaTimes, FaHistory } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaThLarge, FaProjectDiagram, FaUser, FaBars, FaTimes, FaHistory, FaSignOutAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import prfImage from "../assets/images/profileImage.png"; // Replace with actual path
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <FaThLarge /> },
@@ -12,6 +15,29 @@ export default function Navbar() {
     { name: "Account", path: "/account", icon: <FaUser /> },
     { name: "History", path: "/history", icon: <FaHistory /> },
   ];
+
+  const handleLogout = () => {
+    toast.warn("Are you sure you want to logout?", {
+      position: "top-center",
+      autoClose: false,
+      closeOnClick: false,
+      draggable: false,
+      closeButton: (
+        <button
+          className="bg-red-600 text-white px-3 py-1 rounded-md ml-2"
+          onClick={() => {
+            localStorage.removeItem("file_name");
+            localStorage.removeItem("user");
+            toast.dismiss();
+            toast.success("Logged out successfully!");
+            navigate("/");
+          }}
+        >
+          Yes
+        </button>
+      ),
+    });
+  };
 
   return (
     <>
@@ -32,14 +58,13 @@ export default function Navbar() {
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex flex-col gap-2">
+        <nav className="flex flex-col gap-2 flex-grow">
           {menuItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-3 p-3 rounded-md transition duration-300 ease-in-out ${
-                  isActive ? "bg-gray-800 text-white" : "bg-gray-300 text-gray-700 hover:bg-gray-400"
+                `flex items-center gap-3 p-3 rounded-md transition duration-300 ease-in-out ${isActive ? "bg-gray-800 text-white" : "bg-gray-300 text-gray-700 hover:bg-gray-400"
                 }`
               }
             >
@@ -47,6 +72,14 @@ export default function Navbar() {
             </NavLink>
           ))}
         </nav>
+
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+        >
+          <FaSignOutAlt /> Logout
+        </button>
       </div>
 
       {/* Mobile Navbar Toggle Button */}

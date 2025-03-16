@@ -46,20 +46,49 @@ const Body = () => {
     };
 
     const handleDeleteProject = async (file_name) => {
-        const confirmDelete = window.confirm(`Are you sure you want to delete "${file_name}"?`);
-        if (!confirmDelete) return;
+        toast.warn(
+            `Are you sure you want to delete "${file_name}"?`,
+            {
+                position: "top-center",
+                autoClose: false,  // Prevent auto close for manual confirmation
+                closeOnClick: false,
+                draggable: false,
+                closeButton: false,
+                render: (
+                    <div>
+                        <p className="text-lg">Are you sure you want to delete "<strong>{file_name}</strong>"?</p>
+                        <div className="mt-3 flex justify-end space-x-2">
+                            <button
+                                className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                                onClick={async () => {
+                                    try {
+                                        await axios.delete(`http://127.0.0.1:5000/api/projects/delete?email=${email}&file_name=${file_name}`);
 
-        try {
-            await axios.delete(`http://127.0.0.1:5000/api/projects/delete?email=${email}&file_name=${file_name}`);
+                                        // Remove project from UI
+                                        setProjects((prevProjects) => prevProjects.filter(project => project.file_name !== file_name));
 
-            // Optimistically remove project from UI
-            setProjects((prevProjects) => prevProjects.filter(project => project.file_name !== file_name));
-
-            toast.success("Project deleted successfully!");
-        } catch (error) {
-            console.error("Error deleting project:", error);
-            toast.error("Failed to delete project. Please try again.");
-        }
+                                        toast.dismiss(); // Close the confirmation toast
+                                        toast.success("Project deleted successfully!");
+                                    } catch (error) {
+                                        console.error("Error deleting project:", error);
+                                        toast.dismiss(); // Close the confirmation toast
+                                        toast.error("Failed to delete project. Please try again.");
+                                    }
+                                }}
+                            >
+                                Yes, Delete
+                            </button>
+                            <button
+                                className="px-3 py-1 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
+                                onClick={() => toast.dismiss()}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                ),
+            }
+        );
     };
 
     return (
@@ -89,8 +118,8 @@ const Body = () => {
                                     <button onClick={() => handleViewProject(project)} className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition">
                                         <Eye className="text-gray-600" />
                                     </button>
-                                    <button 
-                                        onClick={() => handleDeleteProject(project.file_name)} 
+                                    <button
+                                        onClick={() => handleDeleteProject(project.file_name)}
                                         className="p-2 rounded-lg bg-gray-200 hover:bg-red-300 transition"
                                     >
                                         <Trash2 className="text-gray-600" />
