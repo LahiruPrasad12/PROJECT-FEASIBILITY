@@ -12,6 +12,8 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Header = () => {
@@ -41,7 +43,7 @@ const Header = () => {
 const WhyChooseUs = () => {
     return (
         <motion.section
-            className="w-full bg-gray-100 text-center py-8 px-4 sm:px-6 md:px-12"
+            className="w-full min-h-screen flex flex-col items-center justify-center bg-gray-100 text-center py-8 px-4 sm:px-6 md:px-12"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -76,10 +78,12 @@ const WhyChooseUs = () => {
 };
 
 
+
 const Step1Download = () => {
     return (
         <motion.div
-            className="flex flex-col items-start p-6 sm:p-8 md:p-12 bg-white w-full max-w-7xl mx-auto"
+            id="step1"
+            className="flex flex-col items-start justify-center min-h-screen p-6 sm:p-8 md:p-12 bg-white w-full max-w-7xl mx-auto"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -134,6 +138,7 @@ const Step1Download = () => {
                             Download Form
                         </motion.button>
                         <motion.button
+                            onClick={() => document.getElementById("step2").scrollIntoView({ behavior: "smooth" })}
                             className="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-orange-600 text-sm sm:text-lg w-full sm:w-auto"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
@@ -185,8 +190,9 @@ const Step2Upload = () => {
             const response2 = await axios.post("http://127.0.0.1:5000/fields/financial", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
-            // setMessage("File uploaded successfully!");
-            localStorage.setItem('file_name', selectedFile.name.replace(".pdf", ""))
+            localStorage.setItem('file_name', selectedFile.name.replace(".pdf", ""));
+            toast.success("File uploaded successfully!");
+            document.getElementById("step3").scrollIntoView({ behavior: "smooth" })
         } catch (error) {
             setMessage("File upload failed. Please try again.");
             console.error("Upload error:", error);
@@ -196,7 +202,8 @@ const Step2Upload = () => {
 
     return (
         <motion.div
-            className="w-full max-w-8xl bg-gray-100 mx-auto p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center"
+            id="step2"
+            className="w-full max-w-8xl bg-gray-100 mx-auto p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center min-h-screen"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -259,6 +266,7 @@ const Step3Quizz = () => {
 
     return (
         <motion.div
+            id="step3"
             className="flex flex-col items-center p-6 sm:p-8 md:p-12 bg-white w-full max-w-7xl mx-auto"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -383,12 +391,12 @@ const Footer = () => {
 
 const ProjectPlanning = () => {
     return (
-        <div className="relative min-h-screen bg-white flex flex-col items-center pt-20">
+        <div className="relative h-screen bg-white flex flex-col items-center pt-20">
             <Header />
-            <div className="relative w-full max-w-7xl flex flex-col md:flex-row items-center justify-between px-4 md:px-12">
+            <div className="relative w-full max-w-7xl flex flex-col md:flex-row items-center justify-center px-4 md:px-12 min-h-screen">
                 {/* Left Content (Text + Button) */}
                 <motion.div
-                    className="w-full md:w-1/2 text-center md:text-left"
+                    className="w-full md:w-1/2 text-center md:text-left flex flex-col justify-center flex-1"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut" }}
@@ -400,17 +408,19 @@ const ProjectPlanning = () => {
                         Starts with the Right Feasibility Check
                     </h2>
                     <motion.button
-                        className="mt-6 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 transition"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        onClick={() => document.getElementById("step1").scrollIntoView({ behavior: "smooth" })}
+                        className="mt-6 bg-gray-900 text-white px-5 py-3.5 max-w-xs font-medium rounded-lg shadow-md hover:bg-gray-800 transition-all tracking-wide"
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
                     >
                         Get Started
                     </motion.button>
+
                 </motion.div>
 
                 {/* Right Image */}
                 <motion.div
-                    className="w-full md:w-1/2 flex justify-center mt-6 md:mt-0"
+                    className="w-full md:w-1/2 flex justify-center items-center flex-1"
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
@@ -418,6 +428,8 @@ const ProjectPlanning = () => {
                     <img src={image1} alt="Project Planning" className="w-full max-w-xs md:max-w-md h-auto" />
                 </motion.div>
             </div>
+
+
             <WhyChooseUs />
             <Step1Download />
             <Step2Upload />
