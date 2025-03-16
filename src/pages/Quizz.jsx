@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FaCheckSquare, FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const FeasibilityAssessment = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("Organizational Feasibility");
   const [currentPage, setCurrentPage] = useState(0);
   const [answers, setAnswers] = useState(Array(20).fill(""));
   const [email, setEmail] = useState("");
+  const [submittedTabs, setSubmittedTabs] = useState({
+    "Organizational Feasibility": false,
+    "Operational Feasibility": false,
+  });
 
-  const file_name = localStorage.getItem("file_name")
+  const file_name = localStorage.getItem("file_name");
 
   const categories = ["Organizational Feasibility", "Operational Feasibility"];
   const questionsPerPage = 5;
@@ -64,13 +70,18 @@ const FeasibilityAssessment = () => {
   };
 
   useEffect(() => {
-    // Fetch user data from local storage
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const userData = JSON.parse(storedUser);
       setEmail(userData.email || "");
     }
   }, []);
+
+  useEffect(() => {
+    if (submittedTabs["Organizational Feasibility"] && submittedTabs["Operational Feasibility"]) {
+      navigate("/dashboard");
+    }
+  }, [submittedTabs, navigate]);
 
   const handleSelect = (index, value) => {
     setAnswers((prev) => {
@@ -84,11 +95,11 @@ const FeasibilityAssessment = () => {
     const payload = {
       file_name: file_name,
       email: email,
-      ans: {} // Change from array to object
+      ans: {}
     };
 
     answers.forEach((answer, index) => {
-      payload.ans[`Q${index + 1}`] = answer || "N/A"; // Assign dynamically
+      payload.ans[`Q${index + 1}`] = answer || "N/A";
     });
 
     const apiUrl = selectedCategory === "Organizational Feasibility"
@@ -96,14 +107,12 @@ const FeasibilityAssessment = () => {
       : "http://127.0.0.1:5000/api/operational";
 
     try {
-      const response = await axios.post(apiUrl, payload, {
+      await axios.post(apiUrl, payload, {
         headers: { "Content-Type": "application/json" },
       });
-      console.log("API Response:", response.data);
-      // alert("Assessment submitted successfully!");
       toast.success("Assessment submitted successfully!");
+      setSubmittedTabs((prev) => ({ ...prev, [selectedCategory]: true }));
     } catch (error) {
-      console.error("Submission failed:", error);
       toast.error("Failed to submit assessment. Please try again.");
     }
   };
@@ -119,11 +128,10 @@ const FeasibilityAssessment = () => {
           <button
             key={category}
             onClick={() => { setSelectedCategory(category); setCurrentPage(0); }}
-            className={`flex items-center justify-between w-full px-4 py-3 text-lg font-semibold border-2 transition rounded-lg shadow-md ${selectedCategory === category ? "border-blue-500 bg-white" : "bg-gray-200 hover:bg-gray-300"
-              }`}
+            className={`flex items-center justify-between w-full px-4 py-3 text-lg font-semibold border-2 transition rounded-lg shadow-md ${selectedCategory === category ? "border-blue-500 bg-white" : "bg-gray-200 hover:bg-gray-300"}`}
           >
             {category}
-            {selectedCategory === category ? <FaCheckCircle className="text-red-500" /> : <FaCheckSquare className="text-gray-700" />}
+            {submittedTabs[category] ? <FaCheckCircle className="text-green-500" /> : null}
           </button>
         ))}
         <button
