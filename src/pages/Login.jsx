@@ -41,7 +41,11 @@ const SignIn = () => {
       setLoading(false);
       console.log(data)
       localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/dashboard"); // Redirect to Dashboard
+      if (data.user.projects.length > 0) {
+        navigate("/dashboard"); // Redirect to Dashboard
+      } else {
+        navigate("/home"); // Redirect to Dashboard
+      }
     } catch (error) {
       setLoading(false);
       toast.error(error.response?.data?.message || "Invalid email or password.");
@@ -51,7 +55,7 @@ const SignIn = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center bg-white px-4">
       <div className="flex flex-col md:flex-row w-full max-w-[1440px] items-center md:items-start">
-        
+
         {/* Left Side - Sign In Form */}
         <div className="flex flex-col items-center md:items-start px-4 md:px-[160px] w-full md:w-1/2 mt-10 text-center md:text-left">
           <h2 className="text-[40px] md:text-[70px] font-extrabold text-[#eb5e28] mb-5">SIGN IN</h2>
