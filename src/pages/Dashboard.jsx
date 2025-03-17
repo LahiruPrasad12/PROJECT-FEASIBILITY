@@ -6,6 +6,8 @@ import NavBar from "../components/Navbar";
 const Body = () => {
   const [projects, setProjects] = useState([]);
   const [latestProject, setLatestProject] = useState(null);
+  const [projectStatus, setProjectStatus] = useState("");
+
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -32,6 +34,29 @@ const Body = () => {
       console.error("Error fetching projects:", error);
     }
   };
+
+  useEffect(() => {
+    if (latestProject) {
+      console.log("Received Project:", latestProject);
+
+      const { financial_result, operational_result, organizational_result, technical_result } = latestProject;
+
+      // Get all levels in an array
+      const levels = [financial_result, operational_result, organizational_result, technical_result];
+
+      if (levels.every(level => level === "L1")) {
+        setProjectStatus("Highly Feasible");
+      } else if (levels.includes("L4")) {
+        setProjectStatus("Not Feasible");
+      } else if (levels.filter(level => level === "L1").length === 2 && levels.filter(level => level === "L2").length === 2) {
+        setProjectStatus("Moderately Feasible");
+      } else if (levels.every(level => level === "L2")) {
+        setProjectStatus("Moderately Feasible");
+      } else {
+        setProjectStatus("Marginally Feasible");
+      }
+    }
+  }, [latestProject]);
 
   // Categorizing projects based on feasibility
   const totalProjects = projects?.length || 0;
@@ -62,6 +87,13 @@ const Body = () => {
       marginallyFeasibleCount += 1;
     }
   });
+
+  const statusColor = {
+    "Highly Feasible": "bg-green-500",
+    "Not Feasible": "bg-red-500",
+    "Moderately Feasible": "bg-yellow-500",
+    "Marginally Feasible": "bg-orange-500",
+  };
 
 
   return (
@@ -99,15 +131,20 @@ const Body = () => {
             <p className="font-semibold">Latest Report</p>
             <p className="text-gray-500 text-sm">{new Date().toLocaleDateString()}</p>
           </div>
-          <div className="p-4 bg-gray-100 rounded-lg flex justify-between items-center">
+          <div className="p-6 bg-white rounded-lg shadow-md flex justify-between items-center border border-gray-200">
             <div>
-              <p className="text-red-500 font-semibold">{latestProject.file_name}</p>
-              <p className="text-4xl font-bold">{latestProject.feasibility_score || "N/A"}%</p>
+              <p className="text-gray-500 text-sm">Project Name</p>
+              <p className="text-3xl font-semibold text-gray-800">{latestProject.file_name}</p>
             </div>
-            <span className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm">
-              {latestProject.feasibility || "N/A"}
+
+            <span
+              className={`px-4 py-2 text-sm font-semibold rounded-full shadow-md text-white ${statusColor[projectStatus] || "bg-gray-400"
+                }`}
+            >
+              {projectStatus || "Pending"}
             </span>
           </div>
+
         </div>
       )}
     </div>
