@@ -14,6 +14,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import samplePDF from "../assets/template.pdf"; // Import the PDF file
+
 
 
 const Header = () => {
@@ -79,6 +81,7 @@ const WhyChooseUs = () => {
 
 
 
+
 const Step1Download = () => {
     return (
         <motion.div
@@ -130,13 +133,15 @@ const Step1Download = () => {
 
                     {/* Buttons */}
                     <div className="mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                        <motion.button
-                            className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 text-sm sm:text-lg w-full sm:w-auto"
+                        <motion.a
+                            href={samplePDF}
+                            download="Project_Proposal_Template.pdf"
+                            className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 text-sm sm:text-lg w-full sm:w-auto text-center"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
                             Download Form
-                        </motion.button>
+                        </motion.a>
                         <motion.button
                             onClick={() => document.getElementById("step2").scrollIntoView({ behavior: "smooth" })}
                             className="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-orange-600 text-sm sm:text-lg w-full sm:w-auto"
@@ -151,6 +156,7 @@ const Step1Download = () => {
         </motion.div>
     );
 };
+
 
 
 const Step2Upload = () => {
