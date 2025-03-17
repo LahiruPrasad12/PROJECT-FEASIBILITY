@@ -165,22 +165,43 @@ const FeasibilityAssessment = () => {
           </button>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md flex-1">
-          {displayedQuestions.map((question, i) => (
-            <div key={i + startIndex} className="mb-4">
-              <p className="font-semibold">Question {i + 1 + startIndex}</p>
-              <p className="text-gray-600 mb-2">{question}</p>
-              <select
-                className="w-full p-3 border rounded-lg shadow-sm bg-gray-50"
-                value={answers[i + startIndex]}
-                onChange={(e) => handleSelect(i + startIndex, e.target.value)}
-              >
-                <option value="">Select Answer</option>
-                <option value="A1">Low</option>
-                <option value="A2">Medium</option>
-                <option value="A3">High</option>
-              </select>
-            </div>
-          ))}
+          {selectedCategory === "Organizational Feasibility"
+            ? displayedQuestions.map((question, i) => (
+              <div key={i + startIndex} className="mb-4">
+                <p className="font-semibold">Question {i + 1 + startIndex}</p>
+                <p className="text-gray-600 mb-2">{question}</p>
+                <select
+                  className="w-full p-3 border rounded-lg shadow-sm bg-gray-50"
+                  value={answers[i + startIndex]}
+                  onChange={(e) => handleSelect(i + startIndex, e.target.value)}
+                >
+                  <option value="">Select Answer</option>
+                  <option value="A4">Not Aligned</option>
+                  <option value="A3">Slightly Aligned</option>
+                  <option value="A2">Moderately Aligned</option>
+                  <option value="A1">Well Aligned</option>
+                </select>
+              </div>
+            ))
+            : displayedQuestions.map((question, i) => (
+              <div key={i + startIndex} className="mb-4">
+                <p className="font-semibold">Question {i + 1 + startIndex}</p>
+                <p className="text-gray-600 mb-2">{question}</p>
+                <select
+                  className="w-full p-3 border rounded-lg shadow-sm bg-gray-50"
+                  value={answers[i + startIndex]}
+                  onChange={(e) => handleSelect(i + startIndex, e.target.value)}
+                >
+                  <option value="">Select Answer</option>
+                  <option value="A4">Low</option>
+                  <option value="A3">Medium</option>
+                  <option value="A2">High</option>
+                  <option value="A1">Verry High</option>
+                </select>
+              </div>
+            ))}
+
+
           <div className="flex justify-between mt-4">
             <button disabled={currentPage === 0} onClick={() => setCurrentPage((prev) => prev - 1)}>
               <IoIosArrowBack className="text-3xl" />
