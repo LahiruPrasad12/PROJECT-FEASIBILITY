@@ -16,6 +16,9 @@ const FeasibilityAssessment = () => {
     "Organizational Feasibility": false,
     "Operational Feasibility": false,
   });
+  const [isLoading, setIsLoading] = useState(false);
+
+
 
   const file_name = localStorage.getItem("file_name");
 
@@ -106,6 +109,8 @@ const FeasibilityAssessment = () => {
       ans: {}
     };
 
+    setIsLoading(true)
+
     answers.forEach((answer, index) => {
       payload.ans[`Q${index + 1}`] = answer || "N/A";
     });
@@ -122,12 +127,23 @@ const FeasibilityAssessment = () => {
       setSubmittedTabs((prev) => ({ ...prev, [selectedCategory]: true }));
     } catch (error) {
       toast.error("Failed to submit assessment. Please try again.");
+    } finally {
+      setIsLoading(false)
     }
+
   };
+
+
 
   const startIndex = currentPage * questionsPerPage;
   const displayedQuestions = questions[selectedCategory].slice(startIndex, startIndex + questionsPerPage);
   const isSubmitDisabled = answers.includes("");
+
+  const ChangeState = (category) => {
+    setSelectedCategory(category)
+    setCurrentPage(0);
+    setAnswers(Array(20).fill(""));
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 p-6">
@@ -147,7 +163,7 @@ const FeasibilityAssessment = () => {
           {categories.map((category) => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => ChangeState(category)}
               className={`flex items-center justify-between w-full py-3 mt-2 px-4 rounded-lg font-semibold ${selectedCategory === category ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"
                 }`}
             >
@@ -159,9 +175,9 @@ const FeasibilityAssessment = () => {
             className={`w-full mt-4 py-3 text-lg font-semibold rounded-lg ${answers.includes("") ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
             onClick={handleSubmit}
-            disabled={answers.includes("")}
+            disabled={answers.includes("") || isLoading}
           >
-            Submit
+            {isLoading ? 'Loading...' : 'Submit'}
           </button>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md flex-1">
