@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FaCheckCircle } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaSearch, FaThLarge, FaProjectDiagram, FaUser, FaCheckCircle, FaSpinner } from "react-icons/fa";
 
 const FeasibilityAssessment = () => {
   const navigate = useNavigate();
@@ -91,6 +91,14 @@ const FeasibilityAssessment = () => {
     });
   };
 
+  const getTabIcon = (category) => {
+    return submittedTabs[category] ? (
+      <FaCheckCircle className="text-green-500 ml-2" />
+    ) : (
+      <FaSpinner className="text-yellow-500 ml-2 animate-spin" />
+    );
+  };
+
   const handleSubmit = async () => {
     const payload = {
       file_name: file_name,
@@ -122,50 +130,65 @@ const FeasibilityAssessment = () => {
   const isSubmitDisabled = answers.includes("");
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 p-6 md:p-8 bg-gray-100 min-h-screen items-center justify-center">
-      <div className="flex flex-col gap-4 bg-white p-4 md:p-6 rounded-2xl shadow-lg w-full max-w-xs md:max-w-sm">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => { setSelectedCategory(category); setCurrentPage(0); }}
-            className={`flex items-center justify-between w-full px-4 py-3 text-lg font-semibold border-2 transition rounded-lg shadow-md ${selectedCategory === category ? "border-blue-500 bg-white" : "bg-gray-200 hover:bg-gray-300"}`}
-          >
-            {category}
-            {submittedTabs[category] ? <FaCheckCircle className="text-green-500" /> : null}
-          </button>
-        ))}
-        <button
-          className={`w-full py-3 text-lg font-semibold rounded-lg shadow-md ${isSubmitDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-red-400 hover:bg-red-500 text-white"}`}
-          onClick={handleSubmit}
-          disabled={isSubmitDisabled}
-        >
-          Submit
-        </button>
+    <div className="flex flex-col min-h-screen bg-gray-100 p-6">
+      <div className="flex justify-between items-center bg-white p-4 shadow rounded-md">
+        <h1 className="text-xl font-bold text-gray-700">Feasibility Assessment</h1>
+        <div className="relative">
+          <FaSearch className="absolute left-3 top-3 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search"
+            className="pl-10 p-2 border rounded-full shadow-sm text-gray-600 focus:outline-none"
+          />
+        </div>
       </div>
-      <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg w-full max-w-xs md:max-w-md">
-        {displayedQuestions.map((question, i) => (
-          <div key={i + startIndex} className="mb-4">
-            <p className="font-semibold">Question {i + 1 + startIndex}</p>
-            <p className="text-gray-600 mb-2">{question}</p>
-            <select
-              className="w-full p-3 border rounded-lg shadow-sm bg-gray-50"
-              value={answers[i + startIndex]}
-              onChange={(e) => handleSelect(i + startIndex, e.target.value)}
+      <div className="flex flex-col md:flex-row mt-6 gap-6">
+        <div className="bg-white p-4 rounded-lg shadow-md w-full max-w-xs">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`flex items-center justify-between w-full py-3 mt-2 px-4 rounded-lg font-semibold ${selectedCategory === category ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"
+                }`}
             >
-              <option value="">Select Answer</option>
-              <option value="A1">Low</option>
-              <option value="A2">Medium</option>
-              <option value="A3">High</option>
-            </select>
+              {category}
+              {getTabIcon(category)}
+            </button>
+          ))}
+          <button
+            className={`w-full mt-4 py-3 text-lg font-semibold rounded-lg ${answers.includes("") ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+            onClick={handleSubmit}
+            disabled={answers.includes("")}
+          >
+            Submit
+          </button>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md flex-1">
+          {displayedQuestions.map((question, i) => (
+            <div key={i + startIndex} className="mb-4">
+              <p className="font-semibold">Question {i + 1 + startIndex}</p>
+              <p className="text-gray-600 mb-2">{question}</p>
+              <select
+                className="w-full p-3 border rounded-lg shadow-sm bg-gray-50"
+                value={answers[i + startIndex]}
+                onChange={(e) => handleSelect(i + startIndex, e.target.value)}
+              >
+                <option value="">Select Answer</option>
+                <option value="A1">Low</option>
+                <option value="A2">Medium</option>
+                <option value="A3">High</option>
+              </select>
+            </div>
+          ))}
+          <div className="flex justify-between mt-4">
+            <button disabled={currentPage === 0} onClick={() => setCurrentPage((prev) => prev - 1)}>
+              <IoIosArrowBack className="text-3xl" />
+            </button>
+            <button disabled={startIndex + questionsPerPage >= questions[selectedCategory].length} onClick={() => setCurrentPage((prev) => prev + 1)}>
+              <IoIosArrowForward className="text-3xl" />
+            </button>
           </div>
-        ))}
-        <div className="flex justify-between mt-4">
-          <button disabled={currentPage === 0} onClick={() => setCurrentPage((prev) => prev - 1)}>
-            <IoIosArrowBack className="text-3xl" />
-          </button>
-          <button disabled={startIndex + questionsPerPage >= questions[selectedCategory].length} onClick={() => setCurrentPage((prev) => prev + 1)}>
-            <IoIosArrowForward className="text-3xl" />
-          </button>
         </div>
       </div>
     </div>
