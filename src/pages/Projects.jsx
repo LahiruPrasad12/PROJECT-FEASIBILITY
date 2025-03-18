@@ -47,49 +47,49 @@ const Body = () => {
 
     const handleDeleteProject = async (file_name) => {
         toast.warn(
-            `Are you sure you want to delete "${file_name}"?`,
+            <div>
+                <p className="text-lg font-semibold text-gray-800">
+                    Are you sure you want to delete "<strong>{file_name}</strong>"?
+                </p>
+                <div className="mt-4 flex justify-end space-x-3">
+                    <button
+                        className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
+                        onClick={async () => {
+                            try {
+                                await axios.delete(`http://127.0.0.1:5000/api/projects/delete?email=${email}&file_name=${file_name}`);
+
+                                // Remove project from UI
+                                setProjects((prevProjects) => prevProjects.filter(project => project.file_name !== file_name));
+
+                                toast.dismiss(); // Close the confirmation toast
+                                toast.success("Project deleted successfully!");
+                            } catch (error) {
+                                console.error("Error deleting project:", error);
+                                toast.dismiss();
+                                toast.error("Failed to delete project. Please try again.");
+                            }
+                        }}
+                    >
+                        Yes, Delete
+                    </button>
+                    <button
+                        className="px-4 py-2 bg-gray-400 text-gray-800 rounded-md hover:bg-gray-500 transition"
+                        onClick={() => toast.dismiss()}
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>,
             {
                 position: "top-center",
-                autoClose: false,  // Prevent auto close for manual confirmation
+                autoClose: false,
                 closeOnClick: false,
                 draggable: false,
                 closeButton: false,
-                render: (
-                    <div>
-                        <p className="text-lg">Are you sure you want to delete "<strong>{file_name}</strong>"?</p>
-                        <div className="mt-3 flex justify-end space-x-2">
-                            <button
-                                className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-                                onClick={async () => {
-                                    try {
-                                        await axios.delete(`http://127.0.0.1:5000/api/projects/delete?email=${email}&file_name=${file_name}`);
-
-                                        // Remove project from UI
-                                        setProjects((prevProjects) => prevProjects.filter(project => project.file_name !== file_name));
-
-                                        toast.dismiss(); // Close the confirmation toast
-                                        toast.success("Project deleted successfully!");
-                                    } catch (error) {
-                                        console.error("Error deleting project:", error);
-                                        toast.dismiss(); // Close the confirmation toast
-                                        toast.error("Failed to delete project. Please try again.");
-                                    }
-                                }}
-                            >
-                                Yes, Delete
-                            </button>
-                            <button
-                                className="px-3 py-1 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
-                                onClick={() => toast.dismiss()}
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                ),
             }
         );
     };
+
 
     return (
         <div className="p-6 flex-1 bg-gray-100">
