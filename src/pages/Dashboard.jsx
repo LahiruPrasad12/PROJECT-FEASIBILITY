@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import NavBar from "../components/Navbar";
+import { Eye, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+
 
 const Body = () => {
   const [projects, setProjects] = useState([]);
   const [latestProject, setLatestProject] = useState(null);
   const [projectStatus, setProjectStatus] = useState("");
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -95,6 +99,10 @@ const Body = () => {
     "Marginally Feasible": "bg-orange-500",
   };
 
+  const handleViewProject = (project) => {
+    navigate("/recommandation", { state: { project } });
+  };
+
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -131,19 +139,28 @@ const Body = () => {
             <p className="font-semibold">Latest Report</p>
             <p className="text-gray-500 text-sm">{new Date().toLocaleDateString()}</p>
           </div>
-          <div className="p-6 bg-white rounded-lg shadow-md flex justify-between items-center border border-gray-200">
-            <div>
+          <div className="p-6 bg-white rounded-lg shadow-md flex items-center justify-between border border-gray-200">
+            <div className="flex-1">
               <p className="text-gray-500 text-sm">Project Name</p>
               <p className="text-3xl font-semibold text-gray-800">{latestProject.file_name}</p>
             </div>
 
-            <span
-              className={`px-4 py-2 text-sm font-semibold rounded-full shadow-md text-white ${statusColor[projectStatus] || "bg-gray-400"
-                }`}
-            >
-              {projectStatus || "Pending"}
-            </span>
+            <div className="flex items-center gap-4">
+              <span
+                className={`px-4 py-2 text-sm font-semibold rounded-full shadow-md text-white ${statusColor[projectStatus] || "bg-gray-400"}`}
+              >
+                {projectStatus || "Pending"}
+              </span>
+
+              <button
+                onClick={() => handleViewProject(latestProject)}
+                className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition duration-200"
+              >
+                <Eye className="text-gray-600 w-5 h-5" />
+              </button>
+            </div>
           </div>
+
 
         </div>
       )}

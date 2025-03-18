@@ -27,27 +27,40 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    toast.warn("Are you sure you want to logout?", {
-      position: "top-center",
-      autoClose: false,
-      closeOnClick: false,
-      draggable: false,
-      closeButton: (
-        <button
-          className="bg-red-600 text-white px-3 py-1 rounded-md ml-2"
-          onClick={() => {
-            localStorage.removeItem("file_name");
-            localStorage.removeItem("user");
-            toast.dismiss();
-            toast.success("Logged out successfully!");
-            navigate("/");
-          }}
-        >
-          Yes
-        </button>
-      ),
-    });
+    toast.warn(
+      <div className="flex flex-col items-center">
+        <p className="mb-2 font-semibold">Are you sure you want to logout?</p>
+        <div className="flex gap-4">
+          <button
+            className="bg-red-600 text-white px-3 py-1 rounded-md"
+            onClick={() => {
+              localStorage.removeItem("file_name");
+              localStorage.removeItem("user");
+              toast.dismiss();
+              toast.success("Logged out successfully!");
+              navigate("/");
+            }}
+          >
+            Yes
+          </button>
+          <button
+            className="bg-gray-400 text-white px-3 py-1 rounded-md"
+            onClick={() => toast.dismiss()}
+          >
+            No
+          </button>
+        </div>
+      </div>,
+      {
+        position: "top-center",
+        autoClose: false,
+        closeOnClick: false,
+        draggable: false,
+        closeButton: false,
+      }
+    );
   };
+
 
   return (
     <>
