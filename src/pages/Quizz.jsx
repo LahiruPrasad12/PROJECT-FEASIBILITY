@@ -124,7 +124,17 @@ const FeasibilityAssessment = () => {
         headers: { "Content-Type": "application/json" },
       });
       toast.success("Assessment submitted successfully!");
-      setSubmittedTabs((prev) => ({ ...prev, [selectedCategory]: true }));
+      // submittedTabs["Organizational Feasibility"]
+      setSubmittedTabs((prev) => {
+        const updatedTabs = { ...prev, [selectedCategory]: true };
+
+        // ✅ Check if both are submitted & navigate
+        if (updatedTabs["Organizational Feasibility"] && updatedTabs["Operational Feasibility"]) {
+          navigate("/dashboard");
+        }
+
+        return updatedTabs;
+      });
     } catch (error) {
       toast.error("Failed to submit assessment. Please try again.");
     } finally {
