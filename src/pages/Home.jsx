@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import image1 from "../assets/images/img1.jpg"; // Replace with actual path
 import prfImage from "../assets/images/profileImage.png"; // Replace with actual path
 import HDimg from "../assets/images/header.png"; // Replace with actual path
@@ -19,6 +19,14 @@ import samplePDF from "../assets/template.pdf"; // Import the PDF file
 
 
 const Header = () => {
+    const [loggedUser, setLoggedUser] = useState({});
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user && user.email) {
+            setLoggedUser(user);
+        }
+    }, []);
     return (
         <header className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white shadow-md z-50">
             <div className="flex items-center gap-2">
@@ -33,7 +41,7 @@ const Header = () => {
             <div className="flex items-center gap-2">
                 <img src={prfImage} alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full" />
                 <div className="hidden sm:block">
-                    <p className="text-gray-900 font-medium text-sm sm:text-base">Shanki Mandeera</p>
+                    <p className="text-gray-900 font-medium text-sm sm:text-base">{loggedUser.name}</p>
                     <p className="text-gray-500 text-xs sm:text-sm">User</p>
                 </div>
             </div>

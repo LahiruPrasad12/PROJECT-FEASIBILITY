@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaThLarge, FaProjectDiagram, FaUser, FaBars, FaTimes, FaHistory, FaSignOutAlt, FaSprayCan } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -8,6 +8,8 @@ import prfImage from "../assets/images/profileImage.png"; // Replace with actual
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const [loggedUser, setLoggedUser] = useState({});
+
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <FaThLarge /> },
@@ -16,6 +18,13 @@ export default function Navbar() {
     { name: "History", path: "/history", icon: <FaHistory /> },
     { name: "Predictions", path: "/home", icon: <FaSprayCan /> },
   ];
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user && user.email) {
+      setLoggedUser(user);
+    }
+  }, []);
 
   const handleLogout = () => {
     toast.warn("Are you sure you want to logout?", {
@@ -48,7 +57,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <img src={prfImage} alt="User" className="w-10 h-10 rounded-full object-cover" />
             <div>
-              <h2 className="font-semibold">Shanki Mandeera</h2>
+              <h2 className="font-semibold">{loggedUser.name}</h2>
               <p className="text-sm text-gray-500">User</p>
             </div>
           </div>
