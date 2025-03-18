@@ -132,7 +132,6 @@ const FeasibilityAssessment = () => {
         if (updatedTabs["Organizational Feasibility"] && updatedTabs["Operational Feasibility"]) {
           navigate("/dashboard");
         }
-
         return updatedTabs;
       });
     } catch (error) {
